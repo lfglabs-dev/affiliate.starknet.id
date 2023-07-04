@@ -1,0 +1,124 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 90%;
+}
+
+.container {
+  position: relative;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 650px;
+  height: 350px;
+  box-shadow: 0px 6px 80px rgba(64, 45, 40, 0.15);
+  background: radial-gradient(
+    55.2% 127.01% at 50% 50%,
+    var(--secondary300) 0%,
+    #faefde 100%
+  );
+  border-width: 1px 6px 0px 1px;
+  border-style: solid;
+  border-color: var(--tertiary);
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
+}
+
+.domain {
+  height: 32px;
+  font-family: "QuickZap";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 32px;
+  color: var(--secondary);
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.detouredLogo {
+  position: absolute;
+  right: 175px;
+  top: 13px;
+}
+
+.detouredTextLogo {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+}
+
+.lg1 {
+  position: absolute;
+  right: -130px;
+  bottom: -190px;
+  transform: rotate(-40deg);
+}
+
+.lg2 {
+  position: absolute;
+  left: -230px;
+  top: -150px;
+  transform: rotate(80deg);
+}
+
+.cardCode {
+  /* Placement */
+  background-color: var(--background);
+  height: 83px;
+  width: 650px;
+  border-width: 0px 6px 4px 1px;
+  border-style: solid;
+  border-color: var(--tertiary);
+  border-bottom-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  margin-top: -1px;
+
+  /* Inside */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "QuickZap";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32px;
+  letter-spacing: 0.8em;
+  color: var(--secondary300);
+}
+
+@media (max-width: 1024px) {
+  .domain {
+    font-size: 20px;
+  }
+  .lg1 {
+    visibility: hidden;
+  }
+  .lg2 {
+    visibility: hidden;
+  }
+  .container {
+    max-width: 80%;
+    height: auto;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+  .cardCode {
+    width: 0px;
+    height: 0px;
+    visibility: hidden;
+  }
+
+  .detouredTextLogo,
+  .detouredLogo {
+    visibility: hidden;
+  }
+}
