@@ -4,6 +4,7 @@
   position: relative;
   padding-top: 12vh;
   background-color: var(--background);
+  border: 3px solid red;
 }
 
 .wrapperScreen {
@@ -22,6 +23,7 @@
   align-items: center;
   flex-direction: column;
   text-align: center;
+  border: 1px solid black
 }
 
 .containerScreen {
