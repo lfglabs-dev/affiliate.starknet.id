@@ -42,7 +42,7 @@ export const LevelSection: FC<LevelSectionProps> = ({ level, numberOfRegistratio
   const nextLevelLabel = useMemo(() => {
     if(selectedLevel + 1 === MAX_LEVEL) return `Max level`
     return `${levelData.experienceRange[1]} to level ${selectedLevel + 1}`
-  }, [levelData])
+  }, [selectedLevel, levelData])
 
   const hexagonalBoxContent = useMemo(() => {
     if(level === selectedLevel) {
