@@ -9,6 +9,8 @@ import { LevelSection } from "../components/UI/levelSection";
 import { RedirectionBlock } from "../components/UI/redirectionBlock";
 import DiscordIcon from "../components/UI/iconsComponents/icons/discordIcon";
 import { Download } from "@mui/icons-material";
+import { FaqBoard } from "../components/UI/faq/faq";
+import { faqData } from "../mock/faqData";
 
 const AffiliateSpace: NextPage = () => {
   const { address } = useAccount();
@@ -52,7 +54,9 @@ const AffiliateSpace: NextPage = () => {
             </div>
           </div>
         </div>
-        <div id="faq-section" style={{ border: '1px solid blue', width: '100%' }}></div>
+        <div id="faq-section" style={{ border: '1px solid blue', width: '100%' }}>
+          <FaqBoard faq={faqData}/>
+        </div>
       </div>
     </div>
   );
