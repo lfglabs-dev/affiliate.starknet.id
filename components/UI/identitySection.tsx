@@ -2,7 +2,7 @@ import { FC } from "react";
 import helper from "../../styles/components/helper.module.css";
 import { Avatar } from "@mui/material";
 import StarknetIcon from "./iconsComponents/icons/starknetIcon";
-import { LOREM } from "../../utils/mock";
+import { LOREM } from "../../mock/mock";
 import { AffiliateLink } from "./affiliateLink";
 
 interface IdentitySectionProps {
