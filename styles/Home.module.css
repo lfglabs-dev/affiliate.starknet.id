@@ -1,11 +1,12 @@
 .screen {
   min-height: 100vh;
+  min-width: 100vw;
   z-index: 0;
   position: relative;
   padding-top: 12vh;
   background-color: var(--background);
-  border: 3px solid red;
   overflow: scroll;
+  padding-right: -2px;
 }
 
 .wrapperScreen {
@@ -19,12 +20,12 @@
 .containerScreen,
 .container {
   height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   text-align: center;
-  border: 1px solid black;
   padding: 0.5rem;
 }
 
@@ -141,7 +142,7 @@
     font-size: 2rem;
   }
   .container {
-    height: 85vh;
+    overflow: scroll;
   }
 
   .firstLeaf,
@@ -152,7 +153,7 @@
 
 @media (max-width: 768px) {
   .container {
-    height: 85vh;
+    overflow: scroll;
   }
   .title {
     font-size: 2rem;

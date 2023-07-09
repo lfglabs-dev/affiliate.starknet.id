@@ -15,7 +15,7 @@ export const IdentitySection: FC<IdentitySectionProps> = ({ domain, affiliateLin
   
   return (
     <div className={style.section}>
-      <div className="flex flex-col justify-center items-start w-1/2">
+      <div className={style.column}>
         <div className="p-8">
           <div className="flex flex-row items-center">
             <StarknetIcon width="16" />
@@ -26,7 +26,7 @@ export const IdentitySection: FC<IdentitySectionProps> = ({ domain, affiliateLin
           <AffiliateLink link={affiliateLink} />
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center w-1/2">
+      <div className={style.column}>
         <div className={style.hexagon}>
           <img
             src={`${process.env.NEXT_PUBLIC_STARKNET_ID}/api/identicons/${tokenId}`}
