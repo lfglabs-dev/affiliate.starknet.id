@@ -2,11 +2,11 @@ import { FC, useCallback, useMemo, useState } from "react";
 import { levelsRecord } from "../../mock/levelsData";
 import { Level, MAX_LEVEL } from "../../types/level/types";
 import helper from "../../styles/components/helper.module.css";
-import { Button } from "@mui/material";
 import { ExperienceBar } from "./experienceBar";
 import { HexagonalBox } from "./hexagonalBox";
-import { Lock } from "@mui/icons-material";
+import { KeyboardArrowLeft, KeyboardArrowRight, Lock } from "@mui/icons-material";
 import { LevelBonusMessage } from "./levelBonusMessage";
+import style from "../../styles/components/levelSection.module.css";
 
 interface LevelSectionProps {
   level: number;
@@ -47,7 +47,7 @@ export const LevelSection: FC<LevelSectionProps> = ({ level, numberOfRegistratio
   const hexagonalBoxContent = useMemo(() => {
     if(level === selectedLevel) {
       return (
-        <p>{selectedLevel}</p>
+        <h1>{selectedLevel}</h1>
       )
     }
     return (
@@ -56,20 +56,26 @@ export const LevelSection: FC<LevelSectionProps> = ({ level, numberOfRegistratio
   }, [level, selectedLevel])
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <div className="flex flex-col items-center justify-center">
-        <p>{levelLabel}</p>
-        <HexagonalBox content={hexagonalBoxContent} />
+    <div className={style.section}>
+      <div className={style.innerCard}>
+        <h4 className="mb-5">{levelLabel}</h4>
+        <HexagonalBox content={hexagonalBoxContent}/>
+        <p className="text-small mt-5">{levelData.title}</p>
+
         <ExperienceBar 
           experienceInPercent={experienceProgressionInPercent} 
           currentLevelLabel={currentLevelLabel} 
           nextLevelLabel={nextLevelLabel}/>
-        <div className={helper.row}>
+        <div className="flex flex-row w-1/4 justify-center items-center gap-6 mt-5">
           {selectedLevel - 1 > 0 && (
-            <Button onClick={() => handleOnChangeLevel((selectedLevel - 1) as Level)}>{'<'}</Button>
+            <div className={style.button} onClick={() => handleOnChangeLevel((selectedLevel - 1) as Level)}>
+              <KeyboardArrowLeft fontSize="small" />
+            </div>
           )}
           {selectedLevel + 1 <= MAX_LEVEL && (
-            <Button onClick={() => handleOnChangeLevel((selectedLevel + 1) as Level)}>{'>'}</Button>
+            <div className={style.button} onClick={() => handleOnChangeLevel((selectedLevel + 1) as Level)}>
+              <KeyboardArrowRight fontSize="small" />
+            </div>
           )}
         </div>
       </div>

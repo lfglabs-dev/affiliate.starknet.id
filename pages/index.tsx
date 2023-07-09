@@ -20,14 +20,14 @@ const AffiliateSpace: NextPage = () => {
   const affiliateLink = "https://starknet.id";
 
   const FALLBACK_TOKEN_ID = 595564833601
-  
+
   return (
     <div className={styles.screen}>
       <div className={styles.container}>
         <div id="domain-section" style={{ width: '100%' }}>
           <IdentitySection domain={domainOrAddress} affiliateLink={affiliateLink} tokenId={FALLBACK_TOKEN_ID} />
         </div>
-        <div id="action-section" style={{ border: '1px solid blue', width: '100%' }}>
+        <div id="action-section" className="w-full mt-6" style={{ border: '1px solid blue' }}>
           <div className={helper.row}>
             <div className={helper.col}>
               <LevelSection level={2} numberOfRegistrations={167}/>
