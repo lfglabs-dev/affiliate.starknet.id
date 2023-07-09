@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import type { NextPage } from "next";
 import styles from "../styles/Home.module.css";
 import helper from "../styles/components/helper.module.css";
@@ -19,11 +19,13 @@ const AffiliateSpace: NextPage = () => {
 
   const affiliateLink = "https://starknet.id";
 
+  const FALLBACK_TOKEN_ID = 595564833601
+  
   return (
     <div className={styles.screen}>
       <div className={styles.container}>
-        <div id="domain-section" style={{ border: '1px solid blue', width: '100%' }}>
-          <IdentitySection domain={domainOrAddress} affiliateLink={affiliateLink} tokenId={1} />
+        <div id="domain-section" style={{ width: '100%' }}>
+          <IdentitySection domain={domainOrAddress} affiliateLink={affiliateLink} tokenId={FALLBACK_TOKEN_ID} />
         </div>
         <div id="action-section" style={{ border: '1px solid blue', width: '100%' }}>
           <div className={helper.row}>

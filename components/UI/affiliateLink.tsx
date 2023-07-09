@@ -1,4 +1,7 @@
 import { FC, useCallback } from "react";
+import style from "../../styles/components/affiliateLink.module.css";
+import { ContentCopy } from "@mui/icons-material";
+import { Button } from "@mui/base";
 
 interface AffiliateLinkProps {
   link: string;
@@ -12,8 +15,9 @@ export const AffiliateLink: FC<AffiliateLinkProps> = ({ link }) => {
   }, [link]);
 
   return (
-    <div className="flex flex-row items-center justify-center py-2 cursor-pointer rounded-sm" onClick={handleClick}>
-      <h1>affiliate.starknet.id</h1>
-    </div>
+    <Button className={style.button} onClick={handleClick}>
+      <p className="text-default mr-2">affiliate.starknet.id</p>
+      <ContentCopy />
+    </Button>
   );
 }

@@ -76,7 +76,7 @@ export const LevelSection: FC<LevelSectionProps> = ({ level, numberOfRegistratio
       <div className="mt-3 flex flex-col items-start">
         <p>Your total registration</p>
         <p>{numberOfRegistrations}</p>
-        {levelData.bonuses.map(bonus => <LevelBonusMessage bonus={bonus} isDone={true} isLocked={selectedLevel > level}/>)}
+        {levelData.bonuses.map(bonus => <LevelBonusMessage key={bonus.name} bonus={bonus} isDone={true} isLocked={selectedLevel > level}/>)}
       </div>
     </div>
   )
