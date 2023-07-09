@@ -16,7 +16,7 @@ import BN from "bn.js";
 import { isHexString, numberToString } from "../../utils/stringService";
 import { gweiToEth, hexToDecimal } from "../../utils/feltService";
 import SelectDomain from "./selectDomains";
-import { useDisplayName } from "../../hooks/displayName.tsx";
+import { useDisplayName } from "../../hooks/displayName";
 import { Abi } from "starknet";
 import { posthog } from "posthog-js";
 import TxConfirmationModal from "../UI/txConfirmationModal";

@@ -4,7 +4,7 @@ import styles from "../styles/Home.module.css";
 import helper from "../styles/components/helper.module.css";
 import { useAccount } from "@starknet-react/core";
 import { IdentitySection } from "../components/UI/identitySection";
-import { useDisplayName } from "../hooks/displayName.tsx";
+import { useDisplayName } from "../hooks/displayName";
 import { LevelSection } from "../components/UI/levelSection";
 import { RedirectionBlock } from "../components/UI/redirectionBlock";
 import DiscordIcon from "../components/UI/iconsComponents/icons/discordIcon";

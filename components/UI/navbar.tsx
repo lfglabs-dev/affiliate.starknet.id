@@ -15,7 +15,7 @@ import Wallets from "./wallets";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SelectNetwork from "./selectNetwork";
 import ModalMessage from "./modalMessage";
-import { useDisplayName } from "../../hooks/displayName.tsx";
+import { useDisplayName } from "../../hooks/displayName";
 import { CircularProgress } from "@mui/material";
 import ModalWallet from "./modalWallet";
 
