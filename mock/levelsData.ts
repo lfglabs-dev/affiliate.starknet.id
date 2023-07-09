@@ -24,13 +24,13 @@ export const levelsRecord: Record<Level, LevelData> = {
     experienceRange: [101, 200],
     bonuses: [
       {
-        name: "Xp bonus"
+        name: "Xp bonus lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies ultricies, nunc nisl ultricies nunc, quis ultricies nisl"
       },
       {
-        name: "Xp bonus"
+        name: "Xp bonus lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies ultricies, nunc nisl ultricies nunc, quis ultricies nisl"
       },
       {
-        name: "Xp bonus"
+        name: "Xp bonus lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies ultricies, nunc nisl ultricies nunc, quis ultricies nisl"
       }
     ]
   },

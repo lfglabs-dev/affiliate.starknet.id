@@ -79,10 +79,12 @@ export const LevelSection: FC<LevelSectionProps> = ({ level, numberOfRegistratio
           )}
         </div>
       </div>
-      <div className="mt-3 flex flex-col items-start">
-        <p>Your total registration</p>
-        <p>{numberOfRegistrations}</p>
-        {levelData.bonuses.map(bonus => <LevelBonusMessage key={bonus.name} bonus={bonus} isDone={true} isLocked={selectedLevel > level}/>)}
+      <div className="mt-8 flex flex-col items-start w-full">
+        <p className="text-micro">Your total registration</p>
+        <h1 className="mt-2">{numberOfRegistrations}</h1>
+        <div className="mt-5 flex flex-col gap-6">
+          {levelData.bonuses.map(bonus => <LevelBonusMessage key={bonus.name} bonus={bonus} isDone={true} isLocked={selectedLevel > level}/>)}
+        </div>
       </div>
     </div>
   )
