@@ -25,6 +25,7 @@
   --tertiary: #bf9e7b;
   --background: #fff9f0;
   --nimiq-ease: cubic-bezier(0.25, 0, 0, 1);
+  --background-light: #fffcf8
 }
 
 html,
@@ -33,6 +34,11 @@ body {
   margin: 0;
   font-family: "Poppins-Regular";
   background-color: var(--background);
+  font-size: 16px;
+  font-style: normal;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
 }
 
 a {
@@ -117,4 +123,45 @@ strong {
   .secondLeavesGroup {
     visibility: hidden;
   }
+}
+
+
+h1 {
+  font-family: "QuickZap";
+  font-size: 48px;
+  font-style: bold;
+  font-weight: 700;
+  line-height: 58px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+h2 {
+  font-family: "QuickZap";
+  font-size: 36px;
+  font-style: bold;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+h3 {
+  font-family: "QuickZap";
+  font-size: 30px;
+  font-style: bold;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+h4 {
+  font-family: "QuickZap";
+  font-size: 24px;
+  font-style: bold;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
 }
