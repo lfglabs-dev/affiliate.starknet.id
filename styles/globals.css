@@ -27,6 +27,8 @@
   --nimiq-ease: cubic-bezier(0.25, 0, 0, 1);
   --background-light: #fffcf8;
   --secondary-500: #968B88;
+  --blue: #2B2840;
+  --green: #284028;
 }
 
 html,

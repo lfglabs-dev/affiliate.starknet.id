@@ -27,36 +27,34 @@ const AffiliateSpace: NextPage = () => {
         <div id="domain-section" style={{ width: '100%' }}>
           <IdentitySection domain={domainOrAddress} affiliateLink={affiliateLink} tokenId={FALLBACK_TOKEN_ID} />
         </div>
-        <div id="action-section" className="w-full mt-6" style={{ border: '1px solid blue' }}>
-          <div className={helper.row}>
-            <div className={helper.col}>
+        <div id="action-section" className="w-full mt-6">
+          <div className={`${helper.row} gap-5`}>
+            <div className={`${helper.col} lg:w-1/2`}>
               <LevelSection level={2} numberOfRegistrations={167}/>
             </div>
-            <div className={helper.col}>
-              <div className={helper.box}>
-                <RedirectionBlock 
-                  title="Join us in our discord channel"
-                  description="Connect with our vibrant community of like-minded individuals and industry professionals in our active Discord channel.
-                  Engage in discussions, share insights, and stay-up to date with the latest trends and developments in our field. Join the conversation and unlock a world of networking opportunities and collaborative possibilities"
-                  buttonText="Go to discord channel"
-                  buttonLink="https://discord.gg/2YHSAQJ"
-                  buttonLogo={<DiscordIcon width="16px" color="white" />}
-                />
-              </div>
-              <div className={helper.box}>
-                <RedirectionBlock 
-                  title="Access our valuable collection of assets"
-                  description="Get instant access to a curated selection of top-quality assets. Download and elevate your projects with ease.
-                  Boost your creativity and achieve outstanding results."
-                  buttonText="Download Assets"
-                  buttonLink="https://discord.gg/2YHSAQJ"
-                  buttonLogo={<Download width="16px" />}
-                />
-              </div>
+            <div className={`${helper.col} lg:w-1/2`}>
+              <RedirectionBlock 
+                title="Join us in our discord channel"
+                description="Connect with our vibrant community of like-minded individuals and industry professionals in our active Discord channel.
+                Engage in discussions, share insights, and stay-up to date with the latest trends and developments in our field. Join the conversation and unlock a world of networking opportunities and collaborative possibilities"
+                buttonText="Go to discord channel"
+                buttonLink="https://discord.gg/2YHSAQJ"
+                buttonLogo={<DiscordIcon width="16px" color="white" />}
+                style="secondary"
+                displayLeaves={false}
+              />
+              <RedirectionBlock 
+                title="Access our valuable collection of assets"
+                description="Get instant access to a curated selection of top-quality assets. Download and elevate your projects with ease.
+                Boost your creativity and achieve outstanding results."
+                buttonText="Download Assets"
+                buttonLink="https://discord.gg/2YHSAQJ"
+                buttonLogo={<Download width="16px" />}
+              />
             </div>
           </div>
         </div>
-        <div id="faq-section" style={{ border: '1px solid blue', width: '100%' }}>
+        <div id="faq-section" className="mt-8 w-full">
           <FaqBoard faq={faqData}/>
         </div>
       </div>
