@@ -6,7 +6,6 @@
   padding-top: 12vh;
   background-color: var(--background);
   overflow: scroll;
-  padding-right: -2px;
 }
 
 .wrapperScreen {
@@ -27,6 +26,8 @@
   flex-direction: column;
   text-align: center;
   padding: 0.5rem;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 
 .containerScreen {
