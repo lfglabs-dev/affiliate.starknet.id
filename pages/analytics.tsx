@@ -43,11 +43,11 @@ const Analytics: NextPage = () => {
             />
           </div>
         </div>
-        <div id="overview-section" className="w-full">
-          <div className={helper.row}>
+        <div id="overview-section" className="w-full mt-5">
+          <div className={`${helper.row} gap-5`}>
             <OverviewCard title="Revenue" value={`$${revenue}`} icon={<Paid />} differenceInPercent={55} period={period}/>
-            <OverviewCard title="Revenue" value={`$${revenue}`} icon={<Paid />} differenceInPercent={55} period={period}/>
-            <OverviewCard title="Revenue" value={`$${revenue}`} icon={<Paid />} differenceInPercent={55} period={period}/>
+            <OverviewCard title="Number of domains purchased" value={`${numberOfDomainPurchased}`} icon={<Paid />} differenceInPercent={-5} period={period}/>
+            <OverviewCard title="Number of clicks on the link" value={`${numberOfClicksOnLink}`} icon={<Paid />} differenceInPercent={55} period={period}/>
           </div>
         </div>
         <div id="analytics-section" className="w-full">
