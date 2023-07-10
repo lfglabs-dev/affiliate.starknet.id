@@ -12,6 +12,7 @@ export const baseChartOptions = {
   },
   stroke: {
     curve: "smooth",
+    width: 2,
   },
   xaxis: {
     categories: [
@@ -53,8 +54,8 @@ export const baseChartOptions = {
     show: false,
   },
   grid: {
-    strokeDashArray: 5,
-    borderColor: "#56577A",
+    strokeDashArray: 3,
+    borderColor: "#eae0d5",
   },
   fill: {
     type: "gradient",
@@ -68,7 +69,7 @@ export const baseChartOptions = {
       opacityTo: 0,
       stops: [],
     },
-    colors: ["#0075FF", "#2CD9FF"],
+    colors: ["#bf9e7b"],
   },
-  colors: ["#0075FF", "#2CD9FF"],
+  colors: ["#bf9e7b"],
 }

@@ -52,7 +52,7 @@ const Analytics: NextPage = () => {
         </div>
         <div id="analytics-section" className="w-full">
           <div className={helper.row}>
-            <div className={helper.row}>
+            <div className={`${helper.row} mt-8`}>
               <LineChart title="Revenue" subtitle="Revenue over time"/>
             </div>
             <div className={helper.col}>
