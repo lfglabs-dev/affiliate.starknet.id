@@ -9,6 +9,7 @@ import { ErrorOutline, Paid } from "@mui/icons-material";
 import { LineChart } from "../components/UI/lineChart";
 import { RevenueCard } from "../components/UI/revenueCard";
 import ClickableAction from "../components/UI/iconsComponents/clickableAction";
+import analyticsStyle from "../styles/components/analytics.module.css";
 
 const Analytics: NextPage = () => {
   const [period, setPeriod] = useState<Period>(Period.MONTHLY);
@@ -28,7 +29,7 @@ const Analytics: NextPage = () => {
   return (
     <div className={styles.screen}>
       <div className={styles.container}>
-        <div id="recap-section" className="w-full">
+        <div id="recap-section" className={analyticsStyle.recapContainer}>
           <div className={`${helper.row} justify-between w-full`}>
             <div className="flex flex-col justify-start items-start">
               <p className="text-micro">{`Hello ${username}, welcome to your dashboard`}</p>
@@ -50,19 +51,20 @@ const Analytics: NextPage = () => {
             <OverviewCard title="Number of clicks on the link" value={`${numberOfClicksOnLink}`} icon={<Paid />} differenceInPercent={55} period={period}/>
           </div>
         </div>
-        <div id="analytics-section" className="w-full">
-          <div className={helper.row}>
-            <div className={`${helper.row} mt-8`}>
+        <div id="analytics-section" className={`${analyticsStyle.analyticsContainer}`}>
+          <div className={`${helper.row} gap-5`}>
+            <div className={`${analyticsStyle.chartSection} mt-8`}>
               <LineChart title="Revenue" subtitle="Revenue over time"/>
             </div>
-            <div className={helper.col}>
+            <div className={`${analyticsStyle.card} mt-8`}>
               <RevenueCard title="Revenue to claim" revenue={revenue} />
-              <ErrorOutline />
-              <p>You can claim your income from $200</p>
-              <div className={helper.row}>
+              <ErrorOutline className="mt-5" />
+              <p className="text-default my-2">You can claim your income from $200</p>
+              <div className={helper.col}>
                 <ClickableAction 
                   icon={<Paid />}
                   title="Claim your income"
+                  width="auto"
                 />
               </div>
             </div>
