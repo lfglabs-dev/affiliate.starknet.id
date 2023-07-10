@@ -29,10 +29,10 @@ const Analytics: NextPage = () => {
     <div className={styles.screen}>
       <div className={styles.container}>
         <div id="recap-section" className="w-full">
-          <div className={`${helper.row} justify-around`}>
+          <div className={`${helper.row} justify-between w-full`}>
             <div className="flex flex-col justify-start items-start">
-              <p>{`Hello ${username}, welcome to your dashboard`}</p>
-              <p>{`You have earned $${revenue} in the last `}</p>
+              <p className="text-micro">{`Hello ${username}, welcome to your dashboard`}</p>
+              <p className="text-normal font-bold mt-2">{`You have earned $${revenue} in the last `}</p>
             </div>
             <CustomSelect<Period> 
               value={period}
