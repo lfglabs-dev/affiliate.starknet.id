@@ -138,12 +138,12 @@ const Navbar: FunctionComponent = () => {
             </Link>
           </div>
           <div>
-            <ul className="hidden lg:flex uppercase items-center">
+            <ul className="hidden lg:flex items-center">
               <Link href="/">
-                <li className={styles.menuItem}>Affiliate Space</li>
+                <li className="text-default font-bold">Affiliate Space</li>
               </Link>
               <Link href="/analytics">
-                <li className={styles.menuItem}>Analytics</li>
+                <li className="text-default ml-5 font-bold">Analytics</li>
               </Link>
               {/* <Link href="/jointhetribe">
                 <li className={styles.menuItem}>Join the tribe</li>

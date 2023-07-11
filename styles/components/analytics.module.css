@@ -35,6 +35,15 @@
   width: 66%;
 }
 
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
+
 @media (min-width: 768px) and (max-width: 1024px) {
   .card {
     width: 100%;
@@ -46,6 +55,11 @@
 
   .recapContainer {
     margin-bottom: 30px;
+  }
+
+  .row {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 
@@ -60,5 +74,10 @@
 
   .recapContainer {
     margin-bottom: 30px;
+  }
+
+  .row {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
