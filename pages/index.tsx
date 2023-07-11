@@ -28,11 +28,11 @@ const AffiliateSpace: NextPage = () => {
           <IdentitySection domain={domainOrAddress} affiliateLink={affiliateLink} tokenId={FALLBACK_TOKEN_ID} />
         </div>
         <div id="action-section" className="w-full mt-6">
-          <div className={`${helper.row} gap-5`}>
+          <div className={`${helper.row} justify-between gap-5 h-full`}>
             <div className={`${helper.col} lg:w-1/2`}>
               <LevelSection level={2} numberOfRegistrations={167}/>
             </div>
-            <div className={`${helper.col} lg:w-1/2`}>
+            <div className={`${helper.col} ${styles.redirectionBlock} flex-1 flex-grow gap-7`}>
               <RedirectionBlock 
                 title="Join us in our discord channel"
                 description="Connect with our vibrant community of like-minded individuals and industry professionals in our active Discord channel.
@@ -43,7 +43,7 @@ const AffiliateSpace: NextPage = () => {
                 style="secondary"
                 displayLeaves={false}
               />
-              <RedirectionBlock 
+              <RedirectionBlock
                 title="Access our valuable collection of assets"
                 description="Get instant access to a curated selection of top-quality assets. Download and elevate your projects with ease.
                 Boost your creativity and achieve outstanding results."

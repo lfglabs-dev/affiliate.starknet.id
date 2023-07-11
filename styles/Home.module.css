@@ -138,6 +138,11 @@
   overflow: hidden;
 }
 
+.redirectionBlock {
+  min-height: 100%;
+  width: 50% !important;
+}
+
 @media (min-width: 768px) and (max-width: 1024px) {
   .title {
     font-size: 2rem;
@@ -149,6 +154,10 @@
   .firstLeaf,
   .secondLeaf {
     width: 150px;
+  }
+
+  .redirectionBlock {
+    width: 100% !important;
   }
 }
 
@@ -167,5 +176,9 @@
   .firstLeaf,
   .secondLeaf {
     visibility: hidden;
+  }
+
+  .redirectionBlock {
+    width: 100% !important;
   }
 }
