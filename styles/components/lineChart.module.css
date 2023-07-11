@@ -18,3 +18,11 @@
   padding-right: 5px;
   min-height: 300px;
 }
+
+.green {
+  color: var(--primary);
+}
+
+.red {
+  color: var(--red);
+}

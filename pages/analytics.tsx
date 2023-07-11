@@ -54,7 +54,7 @@ const Analytics: NextPage = () => {
         <div id="analytics-section" className={`${analyticsStyle.analyticsContainer}`}>
           <div className={`${helper.row} gap-5`}>
             <div className={`${analyticsStyle.chartSection} mt-8`}>
-              <LineChart title="Revenue" subtitle="Revenue over time"/>
+              <LineChart title="Revenue" differenceInPercent={55} period={period} />
             </div>
             <div className={`${analyticsStyle.card} mt-8`}>
               <RevenueCard title="Revenue to claim" revenue={revenue} />
