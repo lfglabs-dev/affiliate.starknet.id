@@ -5,7 +5,7 @@ import helper from "../styles/components/helper.module.css";
 import { Period } from "../types/metrics/types";
 import { CustomSelect } from "../components/UI/customSelect";
 import { OverviewCard } from "../components/UI/overviewCard";
-import { ErrorOutline, Paid } from "@mui/icons-material";
+import { CreditScoreRounded, ErrorOutline, Mouse, Paid } from "@mui/icons-material";
 import { LineChart } from "../components/UI/lineChart";
 import { RevenueCard } from "../components/UI/revenueCard";
 import ClickableAction from "../components/UI/iconsComponents/clickableAction";
@@ -47,8 +47,8 @@ const Analytics: NextPage = () => {
         <div id="overview-section" className="w-full mt-5">
           <div className={`${helper.row} gap-5`}>
             <OverviewCard title="Revenue" value={`$${revenue}`} icon={<Paid />} differenceInPercent={55} period={period}/>
-            <OverviewCard title="Number of domains purchased" value={`${numberOfDomainPurchased}`} icon={<Paid />} differenceInPercent={-5} period={period}/>
-            <OverviewCard title="Number of clicks on the link" value={`${numberOfClicksOnLink}`} icon={<Paid />} differenceInPercent={55} period={period}/>
+            <OverviewCard title="Number of domains purchased" value={`${numberOfDomainPurchased}`} icon={<CreditScoreRounded />} differenceInPercent={-5} period={period}/>
+            <OverviewCard title="Number of clicks on the link" value={`${numberOfClicksOnLink}`} icon={<Mouse />} differenceInPercent={55} period={period}/>
           </div>
         </div>
         <div id="analytics-section" className={`${analyticsStyle.analyticsContainer}`}>
