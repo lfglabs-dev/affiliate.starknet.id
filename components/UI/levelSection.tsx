@@ -23,7 +23,6 @@ export const LevelSection: FC<LevelSectionProps> = ({ level, numberOfRegistratio
   const experienceProgressionInPercent = useMemo(() => {
     const [minXp, maxXp] = levelData.experienceRange
     const experience =  ((numberOfRegistrations - minXp) / (maxXp - minXp)) * 100
-    console.log(experience);
     return experience
   }, [levelData, numberOfRegistrations])
 
