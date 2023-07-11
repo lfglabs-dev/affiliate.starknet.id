@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import type { NextPage } from "next";
 import styles from "../styles/Home.module.css";
 import helper from "../styles/components/helper.module.css";
@@ -10,6 +10,7 @@ import { LineChart } from "../components/UI/lineChart";
 import { RevenueCard } from "../components/UI/revenueCard";
 import ClickableAction from "../components/UI/iconsComponents/clickableAction";
 import analyticsStyle from "../styles/components/analytics.module.css";
+import { PeriodToDifferenceLabel } from "../utils/period";
 
 const Analytics: NextPage = () => {
   const [period, setPeriod] = useState<Period>(Period.MONTHLY);
@@ -26,6 +27,11 @@ const Analytics: NextPage = () => {
   const numberOfDomainPurchased = 30;
   const numberOfClicksOnLink = 1200;
 
+  const periodLabel = useMemo(() => {
+    const label = PeriodToDifferenceLabel[period]
+    return label;
+  }, [period]);
+
   return (
     <div className={styles.screen}>
       <div className={styles.container}>
@@ -33,7 +39,7 @@ const Analytics: NextPage = () => {
           <div className={`${analyticsStyle.row} justify-between w-full`}>
             <div className="flex flex-col justify-start items-start">
               <p className="text-micro">{`Hello ${username}, welcome to your dashboard`}</p>
-              <p className="text-normal font-bold mt-2">{`You have earned $${revenue} in the last `}</p>
+              <p className="text-normal font-extrabold mt-2">{`You have earned $${revenue} in the ${periodLabel}`}</p>
             </div>
             <CustomSelect<Period> 
               value={period}
