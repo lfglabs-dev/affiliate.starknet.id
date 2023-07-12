@@ -45,10 +45,6 @@
   width: auto;
 }
 
-.clickableActionPrimary {
-  border-color: var(--primary);
-}
-
 .clickableActionSecondary:active,
 .clickableActionPrimary:active {
   transform: translateY(1px);

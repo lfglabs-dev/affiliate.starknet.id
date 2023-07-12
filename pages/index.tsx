@@ -8,9 +8,9 @@ import { useDisplayName } from "../hooks/displayName";
 import { LevelSection } from "../components/UI/levelSection";
 import { RedirectionBlock } from "../components/UI/redirectionBlock";
 import DiscordIcon from "../components/UI/iconsComponents/icons/discordIcon";
-import { Download } from "@mui/icons-material";
 import { FaqBoard } from "../components/UI/faq/faq";
 import { faqData } from "../mock/faqData";
+import DownloadIcon from "../components/UI/iconsComponents/icons/downloadIcon";
 
 const AffiliateSpace: NextPage = () => {
   const { address } = useAccount();
@@ -39,9 +39,10 @@ const AffiliateSpace: NextPage = () => {
                 Engage in discussions, share insights, and stay-up to date with the latest trends and developments in our field. Join the conversation and unlock a world of networking opportunities and collaborative possibilities"
                 buttonText="Go to discord channel"
                 buttonLink="https://discord.gg/2YHSAQJ"
-                buttonLogo={<DiscordIcon width="16px" color="white" />}
+                buttonLogo={<DiscordIcon width="28px" color="white" />}
                 style="secondary"
                 displayLeaves={false}
+                buttonLogoBackgroundColor="#6371F2"
               />
               <RedirectionBlock
                 title="Access our valuable collection of assets"
@@ -49,7 +50,7 @@ const AffiliateSpace: NextPage = () => {
                 Boost your creativity and achieve outstanding results."
                 buttonText="Download Assets"
                 buttonLink="https://discord.gg/2YHSAQJ"
-                buttonLogo={<Download width="16px" />}
+                buttonLogo={<DownloadIcon width="28px" />}
               />
             </div>
           </div>

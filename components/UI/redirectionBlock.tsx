@@ -11,9 +11,10 @@ interface RedirectionBlockProps {
   buttonLogo: ReactNode;
   style?: "primary" | "secondary"
   displayLeaves?: boolean;
+  buttonLogoBackgroundColor?: string;
 }
 
-export const RedirectionBlock: FC<RedirectionBlockProps> = ({ title, description, buttonLink, buttonText, buttonLogo, style = "primary", displayLeaves = true }) => {
+export const RedirectionBlock: FC<RedirectionBlockProps> = ({ title, description, buttonLink, buttonText, buttonLogo, style = "primary", displayLeaves = true, buttonLogoBackgroundColor }) => {
 
   return (
     <div className={`${styles.card} ${style === "primary" ? styles.primary : styles.secondary} flex flex-1 flex-grow rounded-lg p-6 px-8`}>
@@ -21,7 +22,7 @@ export const RedirectionBlock: FC<RedirectionBlockProps> = ({ title, description
         <h4>{title}</h4>
         <p className="text-small mt-5 mb-2 leading-6">{description}</p>
         <Link href={buttonLink}>
-          <ClickableAction onClick={() => console.log('click')} title={buttonText} icon={buttonLogo} />
+          <ClickableAction onClick={() => console.log('click')} title={buttonText} icon={buttonLogo} style="primary" logoBackgroundColor={buttonLogoBackgroundColor} />
         </Link>
       </div>
       {displayLeaves && (

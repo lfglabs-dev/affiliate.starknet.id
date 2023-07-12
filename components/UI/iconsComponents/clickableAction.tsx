@@ -8,6 +8,7 @@ type ClickableActionProps = {
   description?: string;
   style?: "primary" | "secondary";
   width?: "fixed" | "auto";
+  logoBackgroundColor?: string;
 };
 
 const ClickableAction: FunctionComponent<ClickableActionProps> = ({
@@ -17,6 +18,7 @@ const ClickableAction: FunctionComponent<ClickableActionProps> = ({
   description,
   style = "secondary",
   width = "fixed",
+  logoBackgroundColor
 }) => {
   return (
     <div
@@ -34,6 +36,7 @@ const ClickableAction: FunctionComponent<ClickableActionProps> = ({
             ? styles.clickableIconSecondary
             : styles.clickableIconPrimary
         }
+        style={{ backgroundColor: logoBackgroundColor }}
       >
         {icon}
       </div>
