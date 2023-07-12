@@ -13,7 +13,6 @@ import {
 } from "@starknet-react/core";
 import Wallets from "./wallets";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import SelectNetwork from "./selectNetwork";
 import ModalMessage from "./modalMessage";
 import { useDisplayName } from "../../hooks/displayName";
 import { CircularProgress } from "@mui/material";
@@ -140,10 +139,10 @@ const Navbar: FunctionComponent = () => {
           <div>
             <ul className="hidden lg:flex items-center">
               <Link href="/">
-                <li className="text-default font-bold">Affiliate Space</li>
+                <li className={styles.menuItem}>Affiliate Space</li>
               </Link>
               <Link href="/analytics">
-                <li className="text-default ml-5 font-bold">Analytics</li>
+                <li className={styles.menuItem}>Analytics</li>
               </Link>
               {/* <Link href="/jointhetribe">
                 <li className={styles.menuItem}>Join the tribe</li>

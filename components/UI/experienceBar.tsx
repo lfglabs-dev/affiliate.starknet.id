@@ -1,5 +1,4 @@
 import { FC } from "react";
-import helper from "../../styles/components/helper.module.css";
 
 interface ExperienceBarProps {
   experienceInPercent: number;

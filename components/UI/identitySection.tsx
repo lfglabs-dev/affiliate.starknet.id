@@ -1,9 +1,8 @@
 import { FC } from "react";
-import helper from "../../styles/components/helper.module.css";
-import StarknetIcon from "./iconsComponents/icons/starknetIcon";
 import { LOREM } from "../../mock/mock";
 import { AffiliateLink } from "./affiliateLink";
 import style from "../../styles/components/identitySection.module.css";
+import ColoredStarknetIcon from "./iconsComponents/icons/coloredStarknetIcon";
 
 interface IdentitySectionProps {
   domain: string;
@@ -16,9 +15,9 @@ export const IdentitySection: FC<IdentitySectionProps> = ({ domain, affiliateLin
   return (
     <div className={style.section}>
       <div className={style.column}>
-        <div className="p-8">
+        <div className="p-10 py-5">
           <div className="flex flex-row items-center">
-            <StarknetIcon width="16" />
+            <ColoredStarknetIcon width="16" />
             <p className="ml-1 text-micro">{domain}</p>
           </div>
           <h1 className="uppercase font-bold">Starknet.id</h1>
