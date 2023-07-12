@@ -8,10 +8,13 @@ interface HexagonalBoxProps {
 
 export const HexagonalBox: FC<HexagonalBoxProps> = ({ content, color }) => {
   return (
-    <div className={style.hexagonBox} style={{ backgroundColor: color }}>
-      <div className={style.hexagonBoxInner}>
-        {content}
+    <div className="flex flex-col items-center justify-center relative">
+      <div className={style.hexagonBox} style={{ backgroundColor: color }}>
+        <div className={style.hexagonBoxInner}>
+          {content}
+        </div>
       </div>
+      <div className={style.hexagonBoxShadow} />
     </div>
   );
 };

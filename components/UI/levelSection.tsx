@@ -1,7 +1,6 @@
 import { FC, useCallback, useMemo, useState } from "react";
 import { levelsRecord } from "../../mock/levelsData";
 import { Level, MAX_LEVEL } from "../../types/level/types";
-import helper from "../../styles/components/helper.module.css";
 import { ExperienceBar } from "./experienceBar";
 import { HexagonalBox } from "./hexagonalBox";
 import { KeyboardArrowLeft, KeyboardArrowRight, Lock } from "@mui/icons-material";
