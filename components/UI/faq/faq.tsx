@@ -20,9 +20,15 @@ export const FaqBoard: FC<FaqBoardProps> = ({ faq }) => {
                 <PlusIcon width="10" />
               </div>
             }>
-              <div className="flex flex-row justify-start items-center py-5">
-                <h2 className={style.title}>{`0${index + 1}`}</h2>
-                <p className="text-default ml-6 text-left">{faq.question}</p>
+              <div className={`${style.labelBox} py-5`}>
+                <div className={style.faqHeader}>
+                  <h2 className={style.faqTitle}>{`0${index + 1}`}</h2>
+                  <div className={style.faqButton}>
+                    <PlusIcon width="10" />
+                  </div>
+                </div>
+                <h2 className={`${style.title} mr-6`}>{`0${index + 1}`}</h2>
+                <p className="text-default text-left">{faq.question}</p>
               </div>
             </AccordionSummary>
             <AccordionDetails>
