@@ -72,4 +72,4 @@ export const baseChartOptions = {
     colors: ["#bf9e7b"],
   },
   colors: ["#bf9e7b"],
-}
+};

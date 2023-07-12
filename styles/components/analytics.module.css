@@ -23,7 +23,8 @@
   min-height: 400px;
 }
 
-.chartSection, .revenueSection {
+.chartSection,
+.revenueSection {
   display: flex;
   justify-content: center;
   align-items: center;

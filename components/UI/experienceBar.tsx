@@ -6,7 +6,11 @@ interface ExperienceBarProps {
   nextLevelLabel: string;
 }
 
-export const ExperienceBar: FC<ExperienceBarProps> = ({ experienceInPercent, currentLevelLabel, nextLevelLabel }) => {
+export const ExperienceBar: FC<ExperienceBarProps> = ({
+  experienceInPercent,
+  currentLevelLabel,
+  nextLevelLabel,
+}) => {
   return (
     <div className="flex flex-col items-center justify-center mt-5 w-10/12">
       <div className="w-full h-1 bg-green-200 rounded-full overflow-hidden">
@@ -21,4 +25,4 @@ export const ExperienceBar: FC<ExperienceBarProps> = ({ experienceInPercent, cur
       </div>
     </div>
   );
-}
+};

@@ -15,25 +15,31 @@ import DownloadIcon from "../components/UI/iconsComponents/icons/downloadIcon";
 const AffiliateSpace: NextPage = () => {
   const { address } = useAccount();
 
-  const domainOrAddress = useDisplayName(address ?? "")
+  const domainOrAddress = useDisplayName(address ?? "");
 
   const affiliateLink = "https://starknet.id";
 
-  const FALLBACK_TOKEN_ID = 595564833601
+  const FALLBACK_TOKEN_ID = 595564833601;
 
   return (
     <div className={styles.screen}>
       <div className={styles.container}>
-        <div id="domain-section" style={{ width: '100%' }}>
-          <IdentitySection domain={domainOrAddress} affiliateLink={affiliateLink} tokenId={FALLBACK_TOKEN_ID} />
+        <div id="domain-section" style={{ width: "100%" }}>
+          <IdentitySection
+            domain={domainOrAddress}
+            affiliateLink={affiliateLink}
+            tokenId={FALLBACK_TOKEN_ID}
+          />
         </div>
         <div id="action-section" className="w-full mt-6">
           <div className={`${helper.row} justify-between gap-5 h-full`}>
             <div className={`${helper.col} lg:w-1/2`}>
-              <LevelSection level={2} numberOfRegistrations={167}/>
+              <LevelSection level={2} numberOfRegistrations={167} />
             </div>
-            <div className={`${helper.col} ${styles.redirectionBlock} flex-1 flex-grow gap-7`}>
-              <RedirectionBlock 
+            <div
+              className={`${helper.col} ${styles.redirectionBlock} flex-1 flex-grow gap-7`}
+            >
+              <RedirectionBlock
                 title="Join us in our discord channel"
                 description="Connect with our vibrant community of like-minded individuals and industry professionals in our active Discord channel.
                 Engage in discussions, share insights, and stay-up to date with the latest trends and developments in our field. Join the conversation and unlock a world of networking opportunities and collaborative possibilities"
@@ -56,7 +62,7 @@ const AffiliateSpace: NextPage = () => {
           </div>
         </div>
         <div id="faq-section" className="mt-8 w-full">
-          <FaqBoard faq={faqData}/>
+          <FaqBoard faq={faqData} />
         </div>
       </div>
     </div>

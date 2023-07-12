@@ -8,7 +8,6 @@ interface AffiliateLinkProps {
 }
 
 export const AffiliateLink: FC<AffiliateLinkProps> = ({ link }) => {
-
   const handleClick = useCallback(() => {
     if (!link) return;
     navigator.clipboard.writeText(link);
@@ -20,4 +19,4 @@ export const AffiliateLink: FC<AffiliateLinkProps> = ({ link }) => {
       <ContentCopy />
     </Button>
   );
-}
+};

@@ -6,9 +6,9 @@ export type LevelData = {
   level: number;
   title: string;
   experienceRange: [number, number];
-  bonuses: Bonus[]
-}
+  bonuses: Bonus[];
+};
 
 export type Bonus = {
   name: string;
-}
+};

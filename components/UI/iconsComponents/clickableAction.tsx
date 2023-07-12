@@ -18,7 +18,7 @@ const ClickableAction: FunctionComponent<ClickableActionProps> = ({
   description,
   style = "secondary",
   width = "fixed",
-  logoBackgroundColor
+  logoBackgroundColor,
 }) => {
   return (
     <div

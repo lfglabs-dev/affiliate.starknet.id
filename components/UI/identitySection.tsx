@@ -10,8 +10,11 @@ interface IdentitySectionProps {
   tokenId: number;
 }
 
-export const IdentitySection: FC<IdentitySectionProps> = ({ domain, affiliateLink, tokenId }) => {
-  
+export const IdentitySection: FC<IdentitySectionProps> = ({
+  domain,
+  affiliateLink,
+  tokenId,
+}) => {
   return (
     <div className={style.section}>
       <div className={style.column}>
@@ -36,5 +39,5 @@ export const IdentitySection: FC<IdentitySectionProps> = ({ domain, affiliateLin
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

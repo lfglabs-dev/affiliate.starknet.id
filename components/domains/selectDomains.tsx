@@ -28,9 +28,9 @@ const SelectDomain: FunctionComponent<SelectDomainProps> = ({
   useEffect(() => {
     if (account) {
       fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_LINK}/addr_to_available_ids?addr=${hexToDecimal(
-          account.address
-        )}`
+        `${
+          process.env.NEXT_PUBLIC_SERVER_LINK
+        }/addr_to_available_ids?addr=${hexToDecimal(account.address)}`
       )
         .then((response) => response.json())
         .then((data) => {

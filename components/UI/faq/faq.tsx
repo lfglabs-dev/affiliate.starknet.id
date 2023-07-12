@@ -10,16 +10,25 @@ interface FaqBoardProps {
 
 export const FaqBoard: FC<FaqBoardProps> = ({ faq }) => {
   return (
-    <div className={`${style.container} flex flex-col justify-center items-start p-4`}>
+    <div
+      className={`${style.container} flex flex-col justify-center items-start p-4`}
+    >
       <h4>Frequently asked question</h4>
       <div className="mt-5">
         {faq.map((faq, index) => (
-          <Accordion className="bg-transparent shadow-none" key={faq.question} disableGutters={true} square>
-            <AccordionSummary expandIcon={
-              <div className={style.button}>
-                <PlusIcon width="10" />
-              </div>
-            }>
+          <Accordion
+            className="bg-transparent shadow-none"
+            key={faq.question}
+            disableGutters={true}
+            square
+          >
+            <AccordionSummary
+              expandIcon={
+                <div className={style.button}>
+                  <PlusIcon width="10" />
+                </div>
+              }
+            >
               <div className={`${style.labelBox} py-5`}>
                 <div className={style.faqHeader}>
                   <h2 className={style.faqTitle}>{`0${index + 1}`}</h2>
@@ -38,5 +47,5 @@ export const FaqBoard: FC<FaqBoardProps> = ({ faq }) => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};

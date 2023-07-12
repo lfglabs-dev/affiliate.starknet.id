@@ -35,7 +35,7 @@ export const RevenueCard: FC<RevenueCardProps> = ({ title, revenue }) => {
         <div className={`${style.bottomRightLeaf2} z-20`}>
           <img width="100%" alt="leaf" src="/leaves/new/leaf04.svg" />
         </div>
-        </>
+      </>
     </div>
-  )
-}
+  );
+};
