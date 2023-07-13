@@ -213,3 +213,7 @@ h4 {
   letter-spacing: 0em;
   text-align: left;
 }
+
+.text-bold {
+  font-family: "Poppins-Bold";
+}

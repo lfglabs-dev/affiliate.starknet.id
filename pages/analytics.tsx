@@ -39,7 +39,7 @@ const Analytics: NextPage = () => {
           <div className={`${analyticsStyle.row} justify-between w-full`}>
             <div className="flex flex-col justify-start items-start">
               <p className="text-micro">{`Hello ${username}, welcome to your dashboard`}</p>
-              <p className="text-normal font-extrabold mt-2">{`You have earned $${revenue} in the ${periodLabel}`}</p>
+              <p className="text-normal text-bold mt-2">{`You have earned $${revenue} in the ${periodLabel}`}</p>
             </div>
             <CustomSelect<Period>
               value={period}

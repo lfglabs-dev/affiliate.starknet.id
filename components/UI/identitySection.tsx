@@ -23,7 +23,7 @@ export const IdentitySection: FC<IdentitySectionProps> = ({
             <ColoredStarknetIcon width="16" />
             <p className="ml-1 text-micro">{domain}</p>
           </div>
-          <h1 className="uppercase font-bold">Starknet.id</h1>
+          <h1 className={`${style.title} uppercase font-bold`}>Starknet.id</h1>
           <p className="text-small mb-4">{LOREM}</p>
           <AffiliateLink link={affiliateLink} />
         </div>
