@@ -3,6 +3,14 @@ type IconProps = {
   width: string;
 };
 
+type Identity = {
+  addr: string;
+  domain: string;
+  domain_expiry: number | null;
+  is_owner_main: boolean;
+  error?: string;
+};
+
 type FullId = {
   id: string;
   domain: string;
