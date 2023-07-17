@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import React, { useState, useEffect, FunctionComponent } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { FaTwitter } from "react-icons/fa";
@@ -17,8 +18,11 @@ import ModalMessage from "./modalMessage";
 import { useDisplayName } from "../../hooks/displayName";
 import { CircularProgress } from "@mui/material";
 import ModalWallet from "./modalWallet";
+import { useDomainFromAddress } from "../../hooks/naming";
+import { useRouter } from "next/router";
 
 const Navbar: FunctionComponent = () => {
+  const router = useRouter();
   const [nav, setNav] = useState<boolean>(false);
   const [hasWallet, setHasWallet] = useState<boolean>(false);
   const { address } = useAccount();
@@ -27,6 +31,7 @@ const Navbar: FunctionComponent = () => {
   const { available, connect, disconnect } = useConnectors();
   const { library } = useStarknet();
   const domainOrAddress = useDisplayName(address ?? "");
+  const { hasDomain } = useDomainFromAddress(address);
   const green = "#19AA6E";
   const brown = "#402d28";
   const network =
@@ -85,6 +90,16 @@ const Navbar: FunctionComponent = () => {
       );
     }
   }, [transactions]);
+
+  useEffect(() => {
+    if (isConnected && !hasDomain) {
+      router.push('/error')
+    }
+
+    if(isConnected && hasDomain && router.asPath === '/error') {
+      router.push('/');
+    }
+  }, [isConnected, hasDomain, router])
 
   function disconnectByClick(): void {
     disconnect();
