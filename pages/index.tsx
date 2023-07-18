@@ -7,9 +7,9 @@ import { IdentitySection } from "../components/UI/identitySection";
 import { useDisplayName } from "../hooks/displayName";
 import { LevelSection } from "../components/UI/levelSection";
 import { RedirectionBlock } from "../components/UI/redirectionBlock";
-import DiscordIcon from "../components/UI/iconsComponents/icons/discordIcon";
+import TelegramIcon from "../components/UI/iconsComponents/icons/telegramIcon";
 import { FaqBoard } from "../components/UI/faq/faq";
-import { faqData } from "../mock/faqData";
+import { faqData } from "../components/UI/faqData";
 import DownloadIcon from "../components/UI/iconsComponents/icons/downloadIcon";
 
 const AffiliateSpace: NextPage = () => {
@@ -40,22 +40,21 @@ const AffiliateSpace: NextPage = () => {
               className={`${helper.col} ${styles.redirectionBlock} flex-1 flex-grow gap-7`}
             >
               <RedirectionBlock
-                title="Join us in our discord channel"
-                description="Connect with our vibrant community of like-minded individuals and industry professionals in our active Discord channel.
-                Engage in discussions, share insights, and stay-up to date with the latest trends and developments in our field. Join the conversation and unlock a world of networking opportunities and collaborative possibilities"
-                buttonText="Go to discord channel"
-                buttonLink="https://discord.gg/2YHSAQJ"
-                buttonLogo={<DiscordIcon width="28px" color="white" />}
+                title="Join Our Telegram Community"
+                description="Connect, Collaborate, and Conquer! Share your strategies, learn from others, and build a strong network of StarknetID sponsors. Together, we can achieve more"
+                buttonText="Go to telegram channel"
+                buttonLink="https://discord.gg/2YHSAQJ" //to change
+                buttonLogo={<TelegramIcon width="28px" color="white" />}
                 style="secondary"
                 displayLeaves={false}
                 buttonLogoBackgroundColor="#6371F2"
               />
               <RedirectionBlock
-                title="Access our valuable collection of assets"
-                description="Get instant access to a curated selection of top-quality assets. Download and elevate your projects with ease.
-                Boost your creativity and achieve outstanding results."
-                buttonText="Download Assets"
-                buttonLink="https://discord.gg/2YHSAQJ"
+                title="Marketing Toolkit at Your Fingertips"
+                description="Get access to a range of resources designed to help you succeed.
+                From eye-catching graphics to effective communication strategies, we've got you covered."
+                buttonText="Download Toolkit"
+                buttonLink="https://discord.gg/2YHSAQJ" //to change
                 buttonLogo={<DownloadIcon width="28px" />}
               />
             </div>

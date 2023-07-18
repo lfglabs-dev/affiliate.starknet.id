@@ -92,7 +92,11 @@ export const LevelSection: FC<LevelSectionProps> = ({
         </div>
       </div>
       <div className="mt-8 flex flex-col items-start w-full">
-        <p className="text-micro">Your total registration</p>
+        <p className="text-sm font-black">Unlock Greater Rewards with Every Referral</p>
+        <p className="text-micro">Our tiered system is designed to recognize your efforts. 
+        Each referral brings you closer to the next level, unlocking higher commissions and exclusive benefits. 
+        We value your integrity and active participation in our community. Reach your targets and unlock personalized incentives,
+        all while enjoying the security and ethical practices we uphold.</p>
         <h1 className="mt-2">{numberOfRegistrations}</h1>
         <div className="mt-5 flex flex-col gap-6">
           {levelData.bonuses.map((bonus) => (
