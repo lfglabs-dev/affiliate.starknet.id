@@ -28,10 +28,10 @@ export function CustomSelect<T>({
           ".MuiOutlinedInput-notchedOutline": { border: 0 },
         }}
       >
-        {options.map((option) => (
+        {options.map((option, index) => (
           <MenuItem
             className="text-small"
-            key={option as string}
+            key={index}
             value={option as string}
           >{`${optionPrefix} ${option} ${optionSuffix}`}</MenuItem>
         ))}

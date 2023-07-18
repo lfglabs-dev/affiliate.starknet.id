@@ -18,7 +18,7 @@ export const FaqBoard: FC<FaqBoardProps> = ({ faq }) => {
         {faq.map((faq, index) => (
           <Accordion
             className="bg-transparent shadow-none"
-            key={faq.question}
+            key={index}
             disableGutters={true}
             square
           >

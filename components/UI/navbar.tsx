@@ -91,16 +91,6 @@ const Navbar: FunctionComponent = () => {
     }
   }, [transactions]);
 
-  useEffect(() => {
-    if (isConnected && !hasDomain) {
-      router.push('/error')
-    }
-
-    if(isConnected && hasDomain && router.asPath === '/error') {
-      router.push('/');
-    }
-  }, [isConnected, hasDomain, router])
-
   function disconnectByClick(): void {
     disconnect();
     setIsConnected(false);

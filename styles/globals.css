@@ -27,7 +27,7 @@
   --nimiq-ease: cubic-bezier(0.25, 0, 0, 1);
   --background-light: #fffcf8;
   --secondary-500: #968b88;
-  --blue: #2b2840;
+  --blue: #204f6c;
   --green: #284028;
   --red: #d21313;
 }
@@ -131,7 +131,7 @@ strong {
 
 h1 {
   font-family: "QuickZap";
-  font-size: 48px;
+  font-size: 40px;
   font-style: bold;
   font-weight: 700;
   line-height: 58px;

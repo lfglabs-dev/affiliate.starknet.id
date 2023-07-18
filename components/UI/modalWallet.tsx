@@ -91,12 +91,9 @@ const ModalWallet: FunctionComponent<ModalWalletProps> = ({
           <div className={styles.tx_title}>My transactions</div>
           <div>
             {transactions && transactions.length > 0 ? (
-              transactions.map((tx) => {
+              transactions.map((tx, index) => {
                 return (
-                  <div
-                    className={styles.menu_tx}
-                    key={tx.data?.transaction_hash}
-                  >
+                  <div className={styles.menu_tx} key={index}>
                     <a
                       href={`https://${
                         network === "testnet" ? "testnet." : ""
