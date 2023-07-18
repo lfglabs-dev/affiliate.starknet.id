@@ -24,7 +24,8 @@ export const IdentitySection: FC<IdentitySectionProps> = ({
             <p className="ml-1 text-micro">{domain}</p>
           </div>
           <h1 className={`${style.title} uppercase font-bold`}>Starknet.id</h1>
-          <p className="text-small mb-4">{LOREM}</p>
+          <p className="text-small mb-4">Empower Your Earnings with StarknetID! Our contract-based referral system is your opportunity 
+          to earn and contribute to the growth of the StarknetID ecosystem. Together, we can revolutionize the Web3 space.</p>
           <AffiliateLink link={affiliateLink} />
         </div>
       </div>
