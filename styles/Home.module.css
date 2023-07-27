@@ -1,9 +1,11 @@
 .screen {
-  height: 100vh;
+  min-height: 100vh;
+  min-width: 100vw;
   z-index: 0;
   position: relative;
   padding-top: 12vh;
   background-color: var(--background);
+  overflow: scroll;
 }
 
 .wrapperScreen {
@@ -17,11 +19,15 @@
 .containerScreen,
 .container {
   height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   text-align: center;
+  padding: 0.5rem;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 
 .containerScreen {
@@ -132,23 +138,32 @@
   overflow: hidden;
 }
 
+.redirectionBlock {
+  min-height: 100%;
+  width: 50% !important;
+}
+
 @media (min-width: 768px) and (max-width: 1024px) {
   .title {
     font-size: 2rem;
   }
   .container {
-    height: 85vh;
+    overflow: scroll;
   }
 
   .firstLeaf,
   .secondLeaf {
     width: 150px;
   }
+
+  .redirectionBlock {
+    width: 100% !important;
+  }
 }
 
 @media (max-width: 768px) {
   .container {
-    height: 85vh;
+    overflow: scroll;
   }
   .title {
     font-size: 2rem;
@@ -161,5 +176,9 @@
   .firstLeaf,
   .secondLeaf {
     visibility: hidden;
+  }
+
+  .redirectionBlock {
+    width: 100% !important;
   }
 }

@@ -9,17 +9,17 @@ import {
   useAccount,
   useStarknet,
   useTransactionManager,
-  useTransactions,
 } from "@starknet-react/core";
 import Wallets from "./wallets";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import SelectNetwork from "./selectNetwork";
 import ModalMessage from "./modalMessage";
-import { useDisplayName } from "../../hooks/displayName.tsx";
+import { useDisplayName } from "../../hooks/displayName";
 import { CircularProgress } from "@mui/material";
 import ModalWallet from "./modalWallet";
+import { useRouter } from "next/router";
 
 const Navbar: FunctionComponent = () => {
+  const router = useRouter();
   const [nav, setNav] = useState<boolean>(false);
   const [hasWallet, setHasWallet] = useState<boolean>(false);
   const { address } = useAccount();
@@ -34,18 +34,7 @@ const Navbar: FunctionComponent = () => {
     process.env.NEXT_PUBLIC_IS_TESTNET === "true" ? "testnet" : "mainnet";
   const [txLoading, setTxLoading] = useState<number>(0);
   const { hashes } = useTransactionManager();
-  const transactions = useTransactions({ hashes, watch: true });
   const [showWallet, setShowWallet] = useState<boolean>(false);
-
-  // TODO: Check for starknet react fix and delete that code
-  useEffect(() => {
-    const interval = setInterval(() => {
-      for (const tx of transactions) {
-        tx.refetch();
-      }
-    }, 3_000);
-    return () => clearInterval(interval);
-  }, [transactions?.length]);
 
   useEffect(() => {
     // to handle autoconnect starknet-react adds connector id in local storage
@@ -76,16 +65,6 @@ const Navbar: FunctionComponent = () => {
       setIsWrongNetwork(false);
     }
   }, [library, network, isConnected]);
-
-  useEffect(() => {
-    if (transactions) {
-      // Give the number of tx that are loading (I use any because there is a problem on Starknet React types)
-      setTxLoading(
-        transactions.filter((tx) => (tx?.data as any)?.status === "RECEIVED")
-          .length
-      );
-    }
-  }, [transactions]);
 
   function disconnectByClick(): void {
     disconnect();
@@ -138,7 +117,7 @@ const Navbar: FunctionComponent = () => {
             </Link>
           </div>
           <div>
-            <ul className="hidden lg:flex uppercase items-center">
+            <ul className="hidden lg:flex items-center">
               <Link href="/">
                 <li className={styles.menuItem}>Affiliate Space</li>
               </Link>
@@ -299,7 +278,8 @@ const Navbar: FunctionComponent = () => {
         open={showWallet}
         closeModal={() => setShowWallet(false)}
         disconnectByClick={disconnectByClick}
-        transactions={transactions}
+        hashes={hashes}
+        setTxLoading={setTxLoading}
       />
       <Wallets
         closeWallet={() => setHasWallet(false)}

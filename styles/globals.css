@@ -25,6 +25,11 @@
   --tertiary: #bf9e7b;
   --background: #fff9f0;
   --nimiq-ease: cubic-bezier(0.25, 0, 0, 1);
+  --background-light: #fffcf8;
+  --secondary-500: #968b88;
+  --blue: #204f6c;
+  --green: #284028;
+  --red: #d21313;
 }
 
 html,
@@ -33,6 +38,11 @@ body {
   margin: 0;
   font-family: "Poppins-Regular";
   background-color: var(--background);
+  font-size: 16px;
+  font-style: normal;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
 }
 
 a {
@@ -52,9 +62,9 @@ a {
 /* Scroll bar */
 
 /* width */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 10px;
-}
+} */
 
 /* Track */
 ::-webkit-scrollbar-track {
@@ -117,4 +127,93 @@ strong {
   .secondLeavesGroup {
     visibility: hidden;
   }
+}
+
+h1 {
+  font-family: "QuickZap";
+  font-size: 40px;
+  font-style: bold;
+  font-weight: 700;
+  line-height: 58px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+h2 {
+  font-family: "QuickZap";
+  font-size: 36px;
+  font-style: bold;
+  font-weight: 700;
+  line-height: 36px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+h3 {
+  font-family: "QuickZap";
+  font-size: 30px;
+  font-style: bold;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+h4 {
+  font-family: "QuickZap";
+  font-size: 24px;
+  font-style: bold;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.text-normal {
+  font-family: "Poppins-Regular";
+  font-size: 20px;
+  font-style: normal;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.text-medium {
+  font-family: "Poppins-Regular";
+  font-size: 18px;
+  font-style: normal;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.text-default {
+  font-family: "Poppins-Regular";
+  font-size: 16px;
+  font-style: normal;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.text-small {
+  font-family: "Poppins-Regular";
+  font-size: 14px;
+  font-style: normal;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.text-micro {
+  font-family: "Poppins-Regular";
+  font-size: 12px;
+  font-style: normal;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.text-bold {
+  font-family: "Poppins-Bold";
 }

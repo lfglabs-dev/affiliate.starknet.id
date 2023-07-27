@@ -16,6 +16,7 @@ export function useDecoded(encoded: BN[]): string {
 type DomainData = {
   domain: string;
   error?: string;
+  hasDomain: boolean;
 };
 
 export function useDomainFromAddress(
@@ -24,9 +25,13 @@ export function useDomainFromAddress(
   const { starknetIdNavigator } = useContext(StarknetIdJsContext);
   const [domain, setDomain] = useState<string>("");
   const [error, setError] = useState<string | undefined>();
+  const [hasDomain, setHasDomain] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!address) return;
+    if (!address) {
+      setHasDomain(false);
+      return
+    };
     const fetchStarkName = async () => {
       const domain = await starknetIdNavigator
         ?.getStarkName(address.toString())
@@ -34,11 +39,12 @@ export function useDomainFromAddress(
           setError(err);
         });
       setDomain(domain as string);
+      setHasDomain(true);
     };
     fetchStarkName();
   }, [starknetIdNavigator, address]);
 
-  return { domain, error };
+  return { domain, error, hasDomain };
 }
 
 type AddressData = {

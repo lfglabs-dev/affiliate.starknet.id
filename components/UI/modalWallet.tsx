@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/components/walletMessage.module.css";
 import { FunctionComponent } from "react";
 import { Modal } from "@mui/material";
-import { UseTransactionResult, useAccount } from "@starknet-react/core";
+import {
+  UseTransactionResult,
+  useAccount,
+  useTransactions,
+} from "@starknet-react/core";
 import { ContentCopy } from "@mui/icons-material";
 import CopiedIcon from "./iconsComponents/icons/copiedIcon";
 import ClickableAction from "./iconsComponents/clickableAction";
@@ -17,7 +21,8 @@ type ModalWalletProps = {
   open: boolean;
   domain: string;
   disconnectByClick: () => void;
-  transactions: UseTransactionResult[];
+  hashes: string[];
+  setTxLoading: (txLoading: number) => void;
 };
 
 const ModalWallet: FunctionComponent<ModalWalletProps> = ({
@@ -25,7 +30,8 @@ const ModalWallet: FunctionComponent<ModalWalletProps> = ({
   open,
   domain,
   disconnectByClick,
-  transactions,
+  hashes,
+  setTxLoading,
 }) => {
   const { address, connector } = useAccount();
   const [copied, setCopied] = useState(false);
@@ -39,6 +45,27 @@ const ModalWallet: FunctionComponent<ModalWalletProps> = ({
       setCopied(false);
     }, 1500);
   };
+  const transactions = useTransactions({ hashes, watch: true });
+
+  // TODO: Check for starknet react fix and delete that code
+  useEffect(() => {
+    const interval = setInterval(() => {
+      for (const tx of transactions) {
+        tx.refetch();
+      }
+    }, 3_000);
+    return () => clearInterval(interval);
+  }, [transactions?.length]);
+
+  useEffect(() => {
+    if (transactions) {
+      // Give the number of tx that are loading (I use any because there is a problem on Starknet React types)
+      setTxLoading(
+        transactions.filter((tx) => (tx?.data as any)?.status === "RECEIVED")
+          .length
+      );
+    }
+  }, [transactions]);
 
   return (
     <Modal
@@ -91,12 +118,9 @@ const ModalWallet: FunctionComponent<ModalWalletProps> = ({
           <div className={styles.tx_title}>My transactions</div>
           <div>
             {transactions && transactions.length > 0 ? (
-              transactions.map((tx) => {
+              transactions.map((tx, index) => {
                 return (
-                  <div
-                    className={styles.menu_tx}
-                    key={tx.data?.transaction_hash}
-                  >
+                  <div className={styles.menu_tx} key={index}>
                     <a
                       href={`https://${
                         network === "testnet" ? "testnet." : ""
