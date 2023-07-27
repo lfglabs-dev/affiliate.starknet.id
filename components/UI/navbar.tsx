@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 import React, { useState, useEffect, FunctionComponent } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { FaTwitter } from "react-icons/fa";
@@ -10,7 +9,6 @@ import {
   useAccount,
   useStarknet,
   useTransactionManager,
-  useTransactions,
 } from "@starknet-react/core";
 import Wallets from "./wallets";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -18,7 +16,6 @@ import ModalMessage from "./modalMessage";
 import { useDisplayName } from "../../hooks/displayName";
 import { CircularProgress } from "@mui/material";
 import ModalWallet from "./modalWallet";
-import { useDomainFromAddress } from "../../hooks/naming";
 import { useRouter } from "next/router";
 
 const Navbar: FunctionComponent = () => {
@@ -31,25 +28,13 @@ const Navbar: FunctionComponent = () => {
   const { available, connect, disconnect } = useConnectors();
   const { library } = useStarknet();
   const domainOrAddress = useDisplayName(address ?? "");
-  const { hasDomain } = useDomainFromAddress(address);
   const green = "#19AA6E";
   const brown = "#402d28";
   const network =
     process.env.NEXT_PUBLIC_IS_TESTNET === "true" ? "testnet" : "mainnet";
   const [txLoading, setTxLoading] = useState<number>(0);
   const { hashes } = useTransactionManager();
-  const transactions = useTransactions({ hashes, watch: true });
   const [showWallet, setShowWallet] = useState<boolean>(false);
-
-  // TODO: Check for starknet react fix and delete that code
-  useEffect(() => {
-    const interval = setInterval(() => {
-      for (const tx of transactions) {
-        tx.refetch();
-      }
-    }, 3_000);
-    return () => clearInterval(interval);
-  }, [transactions?.length]);
 
   useEffect(() => {
     // to handle autoconnect starknet-react adds connector id in local storage
@@ -80,16 +65,6 @@ const Navbar: FunctionComponent = () => {
       setIsWrongNetwork(false);
     }
   }, [library, network, isConnected]);
-
-  useEffect(() => {
-    if (transactions) {
-      // Give the number of tx that are loading (I use any because there is a problem on Starknet React types)
-      setTxLoading(
-        transactions.filter((tx) => (tx?.data as any)?.status === "RECEIVED")
-          .length
-      );
-    }
-  }, [transactions]);
 
   function disconnectByClick(): void {
     disconnect();
@@ -303,7 +278,8 @@ const Navbar: FunctionComponent = () => {
         open={showWallet}
         closeModal={() => setShowWallet(false)}
         disconnectByClick={disconnectByClick}
-        transactions={transactions}
+        hashes={hashes}
+        setTxLoading={setTxLoading}
       />
       <Wallets
         closeWallet={() => setHasWallet(false)}
