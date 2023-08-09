@@ -1,7 +1,6 @@
 import { FC, useMemo } from "react";
 import { baseChartOptions } from "../../utils/baseChartOptions";
 import { ApexOptions } from "apexcharts";
-import { chartData } from "../../mock/chartData";
 import dynamic from "next/dynamic";
 import style from "../../styles/components/lineChart.module.css";
 import { Period } from "../../types/metrics/types";
@@ -11,12 +10,14 @@ interface LineChartProps {
   title: string;
   differenceInPercent?: number;
   period: Period;
+  chartData: Array<ChartData> | undefined;
 }
 
 export const LineChart: FC<LineChartProps> = ({
   title,
   differenceInPercent,
   period,
+  chartData,
 }) => {
   const ApexCharts = dynamic(() => import("react-apexcharts"), { ssr: false });
 
@@ -63,13 +64,15 @@ export const LineChart: FC<LineChartProps> = ({
         </div>
       </div>
       <div className={style.chartWrapper}>
-        <MemoizedApexCharts
-          options={chartOptions as ApexOptions}
-          series={chartData as any}
-          type="area"
-          width="100%"
-          height="100%"
-        />
+        {chartData ? (
+          <MemoizedApexCharts
+            options={chartOptions as ApexOptions}
+            series={chartData as any}
+            type="area"
+            width="100%"
+            height="100%"
+          />
+        ) : null}
       </div>
     </div>
   );

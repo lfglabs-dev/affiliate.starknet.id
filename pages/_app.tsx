@@ -10,6 +10,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { StarknetIdJsProvider } from "../context/StarknetIdJsProvider";
 import posthog from "posthog-js";
 import { useRouter } from "next/router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Wallet Connectors
 const connectors = [
@@ -29,25 +30,28 @@ if (typeof window !== "undefined") {
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const queryClient = new QueryClient();
 
   return (
     <>
-      <StarknetConfig connectors={connectors} autoConnect>
-        <StarknetIdJsProvider>
-          <ThemeProvider theme={theme}>
-            <Head>
-              <title>affiliate.starknet.id</title>
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1"
-              />
-            </Head>
-            <Navbar />
-            <Component {...pageProps} />
-          </ThemeProvider>
-          <Analytics />
-        </StarknetIdJsProvider>
-      </StarknetConfig>
+      <QueryClientProvider client={queryClient}>
+        <StarknetConfig connectors={connectors} autoConnect>
+          <StarknetIdJsProvider>
+            <ThemeProvider theme={theme}>
+              <Head>
+                <title>affiliate.starknet.id</title>
+                <meta
+                  name="viewport"
+                  content="width=device-width, initial-scale=1"
+                />
+              </Head>
+              <Navbar />
+              <Component {...pageProps} />
+            </ThemeProvider>
+            <Analytics />
+          </StarknetIdJsProvider>
+        </StarknetConfig>
+      </QueryClientProvider>
     </>
   );
 }

@@ -42,3 +42,13 @@ type Member = {
   description: string;
   public_metrics: PublicMetrics;
 };
+
+type OverviewAnalytics = {
+  value: string;
+  differenceInPercent: number;
+};
+
+type ChartData = {
+  name: string;
+  data: number[];
+};
