@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import type { NextPage } from "next";
 import styles from "../styles/Home.module.css";
 import helper from "../styles/components/helper.module.css";
@@ -12,6 +12,9 @@ import { FaqBoard } from "../components/UI/faq/faq";
 import { faqData } from "../components/UI/faqData";
 import DownloadIcon from "../components/UI/iconsComponents/icons/downloadIcon";
 import Error from "./error";
+import { getLevelStartTime } from "../utils/period";
+import { useGetSalesCount } from "../hooks/metrics";
+import { hexToDecimal } from "../utils/feltService";
 
 const AffiliateSpace: NextPage = () => {
   const { address } = useAccount();
@@ -21,6 +24,22 @@ const AffiliateSpace: NextPage = () => {
   const affiliateLink = `${process.env.NEXT_PUBLIC_APP_LINK}/?sponsor=${address}`;
 
   const FALLBACK_TOKEN_ID = 595564833601;
+
+  const today = useMemo(() => Date.now(), [address]);
+  const { since_date, spacing } = getLevelStartTime(today);
+  const { salesCount, isLoading: salesCountIsLoading } = useGetSalesCount({
+    sponsor: hexToDecimal(address),
+    since_date: since_date.toString(),
+    spacing: spacing.toString(),
+  });
+
+  const salesOverview = useMemo(() => {
+    if (salesCount && !salesCountIsLoading) {
+      return salesCount[0];
+    } else {
+      return 0;
+    }
+  }, [salesCount]);
 
   return (
     <div className={styles.screen}>
@@ -38,7 +57,7 @@ const AffiliateSpace: NextPage = () => {
           <div id="action-section" className="w-full mt-6">
             <div className={`${helper.row} justify-between gap-5 h-full`}>
               <div className={`${helper.col} lg:w-1/2`}>
-                <LevelSection level={2} numberOfRegistrations={167} />
+                <LevelSection level={2} numberOfRegistrations={salesOverview} />
               </div>
               <div
                 className={`${helper.col} ${styles.redirectionBlock} flex-1 flex-grow gap-7`}

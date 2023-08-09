@@ -81,7 +81,6 @@ type RemainingBalanceData = {
 
 export const useRemainingBalance = (address: string): RemainingBalanceData => {
   const { contract } = useReferralContract();
-
   const { data, error } = useContractRead({
     address: contract?.address as string,
     abi: contract?.abi as Abi,

@@ -4,7 +4,7 @@ import { ApexOptions } from "apexcharts";
 import dynamic from "next/dynamic";
 import style from "../../styles/components/lineChart.module.css";
 import { Period } from "../../types/metrics/types";
-import { PeriodToDifferenceLabel } from "../../utils/period";
+import { PeriodToDifferenceLabel, getMonths } from "../../utils/period";
 
 interface LineChartProps {
   title: string;
@@ -25,8 +25,16 @@ export const LineChart: FC<LineChartProps> = ({
     return ApexCharts;
   }, [ApexCharts]);
 
+  const customCategories = useMemo(() => {
+    return getMonths();
+  }, [chartData]);
+
   const chartOptions = {
     ...baseChartOptions,
+    xaxis: {
+      ...baseChartOptions.xaxis,
+      categories: customCategories,
+    },
   };
 
   const differenceLabel = useMemo(() => {

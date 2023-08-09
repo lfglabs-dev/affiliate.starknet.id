@@ -15,20 +15,6 @@ export const baseChartOptions = {
     width: 2,
   },
   xaxis: {
-    categories: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
     labels: {
       style: {
         colors: "#c8cfca",

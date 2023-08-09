@@ -42,7 +42,7 @@ const Analytics: NextPage = () => {
     value: "0",
     differenceInPercent: 0,
   };
-  const { balance, error } = useRemainingBalance(address ?? "");
+  const { balance, error } = useRemainingBalance(hexToDecimal(address) ?? "0");
   const { writeAsync: executeClaim } = useContractWrite({
     calls: [
       {
@@ -109,7 +109,6 @@ const Analytics: NextPage = () => {
   });
 
   const revenueOverview = useMemo(() => {
-    console.log("salesCount", salesCount);
     if (periodRevenueArray && !periodRevenueIsLoading) {
       const diff = getDifference(periodRevenueArray);
       return {
@@ -122,7 +121,6 @@ const Analytics: NextPage = () => {
   }, [periodRevenueArray]);
 
   const salesOverview = useMemo(() => {
-    console.log("salesCount", salesCount);
     if (salesCount && !salesCountIsLoading) {
       const diff = getDifference(salesCount);
       return {
@@ -135,7 +133,6 @@ const Analytics: NextPage = () => {
   }, [salesCount]);
 
   const clicksOverview = useMemo(() => {
-    console.log("clicksCount", clicksCount);
     if (clicksCount && !clicksCountIsLoading) {
       const diff = getDifference(clicksCount);
       return {
@@ -175,7 +172,7 @@ const Analytics: NextPage = () => {
             <div className={`${analyticsStyle.row} justify-between w-full`}>
               <div className="flex flex-col justify-start items-start">
                 <p className="text-micro">{`Hello ${domainOrAddress}, welcome to your dashboard`}</p>
-                <p className="text-normal text-bold mt-2">{`You have earned $${revenueOverview.value} ${periodLabel}`}</p>
+                <p className="text-normal text-bold mt-2">{`You have earned ${revenueOverview.value} ETH ${periodLabel}`}</p>
               </div>
               <CustomSelect<Period>
                 value={period}
@@ -190,7 +187,7 @@ const Analytics: NextPage = () => {
             <div className={`${helper.row} gap-5`}>
               <OverviewCard
                 title="Revenue"
-                value={`$${revenueOverview.value}`}
+                value={`${revenueOverview.value} ETH`}
                 icon={<Paid />}
                 differenceInPercent={revenueOverview.differenceInPercent}
                 period={period}
@@ -235,7 +232,7 @@ const Analytics: NextPage = () => {
                 />
                 <ErrorOutline className="mt-5" />
                 <p className="text-default my-2">
-                  You can claim your income from $200
+                  You can claim your income from 0.1 ETH
                 </p>
                 <div className={helper.col}>
                   <ClickableAction

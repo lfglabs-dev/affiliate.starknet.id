@@ -18,3 +18,41 @@ export const getDifference = (arr: number[]): number => {
   }
   return diff;
 };
+
+export const getLevelStartTime = (
+  today: number
+): {
+  since_date: number;
+  spacing: number;
+} => {
+  const date = new Date();
+  date.setMonth(7); // August
+  date.setDate(7); // day of the month
+  date.setHours(0, 0, 0, 0); // Set the time to midnight
+  const since_date = date.getTime();
+  const spacing = today - since_date;
+
+  return { since_date, spacing: spacing + 10 };
+};
+
+export const getMonths = () => {
+  const currentMonth = new Date().getMonth();
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  return [
+    ...months.slice(currentMonth + 1),
+    ...months.slice(0, currentMonth + 1),
+  ];
+};
