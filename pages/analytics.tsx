@@ -228,7 +228,7 @@ const Analytics: NextPage = () => {
               <div className={`${analyticsStyle.card} mt-8`}>
                 <RevenueCard
                   title="Revenue to claim"
-                  revenue={remainingBalance}
+                  revenue={toReadablePrice(remainingBalance)}
                 />
                 <ErrorOutline className="mt-5" />
                 <p className="text-default my-2">
