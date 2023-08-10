@@ -19,3 +19,8 @@ export type RevenueResponse = {
 export type CountResponse = {
   counts: Array<number>;
 };
+
+export type OverviewProps = {
+  value: string;
+  differenceInPercent: number;
+};

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import type { NextPage } from "next";
 import styles from "../styles/Home.module.css";
 import helper from "../styles/components/helper.module.css";
@@ -13,33 +13,36 @@ import { faqData } from "../components/UI/faqData";
 import DownloadIcon from "../components/UI/iconsComponents/icons/downloadIcon";
 import Error from "./error";
 import { getLevelStartTime } from "../utils/period";
-import { useGetSalesCount } from "../hooks/metrics";
 import { hexToDecimal } from "../utils/feltService";
 
 const AffiliateSpace: NextPage = () => {
   const { address } = useAccount();
-
   const domainOrAddress = useDisplayName(address ?? "");
-
   const affiliateLink = `${process.env.NEXT_PUBLIC_APP_LINK}/?sponsor=${address}`;
-
   const FALLBACK_TOKEN_ID = 595564833601;
+  const [salesOverview, setSalesOverview] = useState<number>(0);
 
   const today = useMemo(() => Date.now(), [address]);
   const { since_date, spacing } = getLevelStartTime(today);
-  const { salesCount, isLoading: salesCountIsLoading } = useGetSalesCount({
-    sponsor: hexToDecimal(address),
-    since_date: since_date.toString(),
-    spacing: spacing.toString(),
-  });
-
-  const salesOverview = useMemo(() => {
-    if (salesCount && !salesCountIsLoading) {
-      return salesCount[0];
-    } else {
-      return 0;
-    }
-  }, [salesCount]);
+  useEffect(() => {
+    if (!address) return;
+    fetch(
+      `${
+        process.env.NEXT_PUBLIC_API_URL
+      }referral/sales_count?sponsor=${hexToDecimal(
+        address
+      )}&since_date=${since_date.toString()}&spacing=${spacing.toString()}`
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        if (result && result.counts) {
+          setSalesOverview(result.counts[0]);
+        }
+      })
+      .catch((error) => {
+        console.log("An error occured while fetching user revenue", error);
+      });
+  }, [address]);
 
   return (
     <div className={styles.screen}>

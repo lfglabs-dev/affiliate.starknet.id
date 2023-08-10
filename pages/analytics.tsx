@@ -1,8 +1,8 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import type { NextPage } from "next";
 import styles from "../styles/Home.module.css";
 import helper from "../styles/components/helper.module.css";
-import { Period, PeriodToSpacing } from "../types/metrics/types";
+import { OverviewProps, Period, PeriodToSpacing } from "../types/metrics/types";
 import { CustomSelect } from "../components/UI/customSelect";
 import { OverviewCard } from "../components/UI/overviewCard";
 import {
@@ -18,15 +18,9 @@ import analyticsStyle from "../styles/components/analytics.module.css";
 import { PeriodToDifferenceLabel, getDifference } from "../utils/period";
 import { useAccount, useContractWrite } from "@starknet-react/core";
 import Error from "./error";
-import {
-  useGetClicks,
-  useGetRevenue,
-  useGetSalesCount,
-  useRemainingBalance,
-} from "../hooks/metrics";
+import { useRemainingBalance } from "../hooks/metrics";
 import { hexToDecimal } from "../utils/feltService";
 import { toReadablePrice } from "../utils/priceService";
-import { Call } from "starknet";
 import { useDisplayName } from "../hooks/displayName";
 
 const Analytics: NextPage = () => {
@@ -42,6 +36,13 @@ const Analytics: NextPage = () => {
     value: "0",
     differenceInPercent: 0,
   };
+  const [revenueOverview, setRevenueOverview] =
+    useState<OverviewProps>(emptyOverview);
+  const [salesOverview, setSalesOverview] =
+    useState<OverviewProps>(emptyOverview);
+  const [clicksOverview, setClicksOverview] =
+    useState<OverviewProps>(emptyOverview);
+  const [chartData, setChartData] = useState<ChartData[]>();
   const { balance, error } = useRemainingBalance(hexToDecimal(address) ?? "0");
   const { writeAsync: executeClaim } = useContractWrite({
     calls: [
@@ -77,84 +78,120 @@ const Analytics: NextPage = () => {
     return Math.floor(today.getTime() / 1000);
   }, [period]);
 
-  // fetch revenues for a year over 12 months
-  const { revenueArray, isLoading: revenueIsLoading } = useGetRevenue({
-    sponsor: hexToDecimal(address),
-    since_date: aYearAgo.toString(),
-    spacing: PeriodToSpacing[Period.MONTHLY],
-  });
+  // fetch revenues over 12 months
+  useEffect(() => {
+    if (!address || !period) return;
+    fetch(
+      `${
+        process.env.NEXT_PUBLIC_API_URL
+      }referral/revenue?sponsor=${hexToDecimal(
+        address
+      )}&since_date=${aYearAgo.toString()}&spacing=${
+        PeriodToSpacing[Period.MONTHLY]
+      }`
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        if (result && result.revenues) {
+          const periodRevenueArray = result.revenues;
+          setChartData([
+            {
+              name: "Revenue",
+              data: periodRevenueArray.map((value: number) =>
+                toReadablePrice(value)
+              ),
+            },
+          ]);
+        }
+      })
+      .catch((error) => {
+        console.log("An error occured while fetching user revenue", error);
+      });
+  }, [period, address]);
 
   // fetch revenues over selected period
-  const {
-    revenueArray: periodRevenueArray,
-    isLoading: periodRevenueIsLoading,
-  } = useGetRevenue({
-    sponsor: hexToDecimal(address),
-    since_date: sinceDate.toString(),
-    spacing: PeriodToSpacing[period],
-  });
+  useEffect(() => {
+    if (address && period) {
+      fetch(
+        `${
+          process.env.NEXT_PUBLIC_API_URL
+        }referral/revenue?sponsor=${hexToDecimal(
+          address
+        )}&since_date=${sinceDate.toString()}&spacing=${
+          PeriodToSpacing[period]
+        }`
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          if (result && result.revenues) {
+            const periodRevenueArray = result.revenues;
+            const diff = getDifference(periodRevenueArray);
+            setRevenueOverview({
+              value: toReadablePrice(periodRevenueArray[1]).toString(),
+              differenceInPercent: diff,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(
+            "An error occured while fetching user revenue over selected period",
+            error
+          );
+        });
+    }
+  }, [period, address, sinceDate]);
 
   // fetch sales counts over selected period
-  const { salesCount, isLoading: salesCountIsLoading } = useGetSalesCount({
-    sponsor: hexToDecimal(address),
-    since_date: sinceDate.toString(),
-    spacing: PeriodToSpacing[period],
-  });
+  useEffect(() => {
+    if (!address || !period) return;
+    fetch(
+      `${
+        process.env.NEXT_PUBLIC_API_URL
+      }referral/sales_count?sponsor=${hexToDecimal(
+        address
+      )}&since_date=${sinceDate.toString()}&spacing=${PeriodToSpacing[period]}`
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        if (result && result.counts) {
+          const salesCounts = result.counts;
+          const diff = getDifference(salesCounts);
+          setSalesOverview({
+            value: toReadablePrice(salesCounts[1]).toString(),
+            differenceInPercent: diff,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log("An error occured while fetching user sales counts", error);
+      });
+  }, [period, address, sinceDate]);
 
   // fetch clicks counts over selected period
-  const { clicksCount, isLoading: clicksCountIsLoading } = useGetClicks({
-    sponsor: hexToDecimal(address),
-    since_day: sinceDate.toString(),
-    spacing: PeriodToSpacing[period],
-  });
-
-  const revenueOverview = useMemo(() => {
-    if (periodRevenueArray && !periodRevenueIsLoading) {
-      const diff = getDifference(periodRevenueArray);
-      return {
-        value: toReadablePrice(periodRevenueArray[1]).toString(),
-        differenceInPercent: diff,
-      };
-    } else {
-      return emptyOverview;
-    }
-  }, [periodRevenueArray]);
-
-  const salesOverview = useMemo(() => {
-    if (salesCount && !salesCountIsLoading) {
-      const diff = getDifference(salesCount);
-      return {
-        value: toReadablePrice(salesCount[1]).toString(),
-        differenceInPercent: diff,
-      };
-    } else {
-      return emptyOverview;
-    }
-  }, [salesCount]);
-
-  const clicksOverview = useMemo(() => {
-    if (clicksCount && !clicksCountIsLoading) {
-      const diff = getDifference(clicksCount);
-      return {
-        value: toReadablePrice(clicksCount[1]).toString(),
-        differenceInPercent: diff,
-      };
-    } else {
-      return emptyOverview;
-    }
-  }, [clicksCount]);
-
-  const chartData = useMemo(() => {
-    if (revenueArray) {
-      const updatedArr = revenueArray.map((value) => toReadablePrice(value));
-      return [
-        {
-          name: "Revenue",
-          data: updatedArr,
-        },
-      ];
-    }
-  }, [period, revenueArray]);
+  useEffect(() => {
+    if (!address || !period) return;
+    fetch(
+      `${
+        process.env.NEXT_PUBLIC_API_URL
+      }referral/click_count?sponsor=${hexToDecimal(
+        address
+      )}&since_day=${sinceDate.toString()}&spacing=${PeriodToSpacing[period]}`
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        if (result && result.counts) {
+          const clicks = result.counts;
+          const diff = getDifference(clicks);
+          setClicksOverview({
+            value: toReadablePrice(clicks[1]).toString(),
+            differenceInPercent: diff,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log("An error occured while fetching user click counts", error);
+      });
+  }, [period, address, sinceDate]);
 
   const periodLabel = useMemo(() => {
     const label = PeriodToDifferenceLabel[period];
@@ -214,21 +251,17 @@ const Analytics: NextPage = () => {
           >
             <div className={`${helper.row} gap-5`}>
               <div className={`${analyticsStyle.chartSection} mt-8`}>
-                {!revenueIsLoading ? (
-                  <LineChart
-                    title="Revenue"
-                    differenceInPercent={revenueOverview.differenceInPercent}
-                    period={period}
-                    chartData={chartData}
-                  />
-                ) : (
-                  <p>is loadind</p>
-                )}
+                <LineChart
+                  title="Revenue"
+                  differenceInPercent={revenueOverview.differenceInPercent}
+                  period={period}
+                  chartData={chartData}
+                />
               </div>
               <div className={`${analyticsStyle.card} mt-8`}>
                 <RevenueCard
                   title="Revenue to claim"
-                  revenue={toReadablePrice(remainingBalance)}
+                  revenue={remainingBalance}
                 />
                 <ErrorOutline className="mt-5" />
                 <p className="text-default my-2">
