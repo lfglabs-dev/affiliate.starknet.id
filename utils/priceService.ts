@@ -28,5 +28,5 @@ export function getYearlyPriceFromDomain(domain: string): number {
 }
 
 export function toReadablePrice(num: number): number {
-  return parseInt((num / 1e18).toFixed(4));
+  return parseFloat((num / 1e18).toFixed(6));
 }
