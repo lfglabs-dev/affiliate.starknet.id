@@ -88,7 +88,7 @@ const Analytics: NextPage = () => {
     fetch(
       `${
         process.env.NEXT_PUBLIC_API_URL
-      }/referral/revenue?sponsor=${hexToDecimal(
+      }referral/revenue?sponsor=${hexToDecimal(
         address
       )}&since_date=${aYearAgo.toString()}&spacing=${
         PeriodToSpacing[Period.MONTHLY]
@@ -119,7 +119,7 @@ const Analytics: NextPage = () => {
       fetch(
         `${
           process.env.NEXT_PUBLIC_API_URL
-        }/referral/revenue?sponsor=${hexToDecimal(
+        }referral/revenue?sponsor=${hexToDecimal(
           address
         )}&since_date=${sinceDate.toString()}&spacing=${
           PeriodToSpacing[period]
@@ -151,7 +151,7 @@ const Analytics: NextPage = () => {
     fetch(
       `${
         process.env.NEXT_PUBLIC_API_URL
-      }/referral/sales_count?sponsor=${hexToDecimal(
+      }referral/sales_count?sponsor=${hexToDecimal(
         address
       )}&since_date=${sinceDate.toString()}&spacing=${PeriodToSpacing[period]}`
     )
@@ -177,7 +177,7 @@ const Analytics: NextPage = () => {
     fetch(
       `${
         process.env.NEXT_PUBLIC_API_URL
-      }/referral/click_count?sponsor=${hexToDecimal(
+      }referral/click_count?sponsor=${hexToDecimal(
         address
       )}&since_day=${sinceDate.toString()}&spacing=${PeriodToSpacing[period]}`
     )
