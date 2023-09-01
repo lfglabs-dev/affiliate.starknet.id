@@ -66,7 +66,7 @@ export const LineChart: FC<LineChartProps> = ({
         </div>
       </div>
       <div className={style.chartWrapper}>
-        {chartData ? (
+        {typeof window !== "undefined" && chartData ? (
           <Chart
             options={chartOptions as ApexOptions}
             series={chartData as any}
