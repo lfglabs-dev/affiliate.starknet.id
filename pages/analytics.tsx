@@ -84,7 +84,7 @@ const Analytics: NextPage = () => {
     fetch(
       `${
         process.env.NEXT_PUBLIC_API_URL
-      }referral/revenue?sponsor=${hexToDecimal(
+      }/referral/revenue?sponsor=${hexToDecimal(
         address
       )}&since_date=${aYearAgo.toString()}&spacing=${
         PeriodToSpacing[Period.MONTHLY]
@@ -115,7 +115,7 @@ const Analytics: NextPage = () => {
       fetch(
         `${
           process.env.NEXT_PUBLIC_API_URL
-        }referral/revenue?sponsor=${hexToDecimal(
+        }/referral/revenue?sponsor=${hexToDecimal(
           address
         )}&since_date=${sinceDate.toString()}&spacing=${
           PeriodToSpacing[period]
@@ -147,7 +147,7 @@ const Analytics: NextPage = () => {
     fetch(
       `${
         process.env.NEXT_PUBLIC_API_URL
-      }referral/sales_count?sponsor=${hexToDecimal(
+      }/referral/sales_count?sponsor=${hexToDecimal(
         address
       )}&since_date=${sinceDate.toString()}&spacing=${PeriodToSpacing[period]}`
     )
@@ -157,7 +157,7 @@ const Analytics: NextPage = () => {
           const salesCounts = result.counts;
           const diff = getDifference(salesCounts);
           setSalesOverview({
-            value: toReadablePrice(salesCounts[1]).toString(),
+            value: salesCounts[1].toString(),
             differenceInPercent: diff,
           });
         }
@@ -173,7 +173,7 @@ const Analytics: NextPage = () => {
     fetch(
       `${
         process.env.NEXT_PUBLIC_API_URL
-      }referral/click_count?sponsor=${hexToDecimal(
+      }/referral/click_count?sponsor=${hexToDecimal(
         address
       )}&since_day=${sinceDate.toString()}&spacing=${PeriodToSpacing[period]}`
     )
