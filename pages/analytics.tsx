@@ -28,10 +28,12 @@ const Analytics: NextPage = () => {
   const { address } = useAccount();
   const periods = [Period.DAILY, Period.WEEKLY, Period.MONTHLY, Period.YEARLY];
   const domainOrAddress = useDisplayName(address ?? "");
-  const aYearAgo = Math.floor(
-    new Date(new Date().setFullYear(new Date().getFullYear() - 1)).getTime() /
-      1000
-  );
+  const aYearAgo = useMemo(() => {
+    return Math.floor(
+      new Date(new Date().setFullYear(new Date().getFullYear() - 1)).getTime() /
+        1000
+    );
+  }, []);
   const emptyOverview = {
     value: "0",
     differenceInPercent: 0,
