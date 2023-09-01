@@ -34,10 +34,12 @@ const Analytics: NextPage = () => {
         1000
     );
   }, []);
-  const emptyOverview = {
-    value: "0",
-    differenceInPercent: 0,
-  };
+  const emptyOverview = useMemo(() => {
+    return {
+      value: "0",
+      differenceInPercent: 0,
+    };
+  }, []);
   const [revenueOverview, setRevenueOverview] =
     useState<OverviewProps>(emptyOverview);
   const [salesOverview, setSalesOverview] =

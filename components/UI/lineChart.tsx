@@ -1,10 +1,10 @@
 import { FC, useMemo } from "react";
 import { baseChartOptions } from "../../utils/baseChartOptions";
 import { ApexOptions } from "apexcharts";
+import dynamic from "next/dynamic";
 import style from "../../styles/components/lineChart.module.css";
 import { Period } from "../../types/metrics/types";
 import { PeriodToDifferenceLabel, getMonths } from "../../utils/period";
-import Chart from "react-apexcharts";
 
 interface LineChartProps {
   title: string;
@@ -19,17 +19,25 @@ export const LineChart: FC<LineChartProps> = ({
   period,
   chartData,
 }) => {
+  const ApexCharts = dynamic(() => import("react-apexcharts"), { ssr: false });
+
+  const MemoizedApexCharts = useMemo(() => {
+    return ApexCharts;
+  }, [ApexCharts]);
+
   const customCategories = useMemo(() => {
     return getMonths();
   }, [chartData]);
 
-  const chartOptions = {
-    ...baseChartOptions,
-    xaxis: {
-      ...baseChartOptions.xaxis,
-      categories: customCategories,
-    },
-  };
+  const chartOptions = useMemo(() => {
+    return {
+      ...baseChartOptions,
+      xaxis: {
+        ...baseChartOptions.xaxis,
+        categories: customCategories,
+      },
+    };
+  }, [customCategories]);
 
   const differenceLabel = useMemo(() => {
     if (!differenceInPercent) {
@@ -66,8 +74,8 @@ export const LineChart: FC<LineChartProps> = ({
         </div>
       </div>
       <div className={style.chartWrapper}>
-        {typeof window !== "undefined" && chartData ? (
-          <Chart
+        {chartData ? (
+          <MemoizedApexCharts
             options={chartOptions as ApexOptions}
             series={chartData as any}
             type="area"
