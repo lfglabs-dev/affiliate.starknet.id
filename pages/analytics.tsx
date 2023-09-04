@@ -11,7 +11,7 @@ import {
   Mouse,
   Paid,
 } from "@mui/icons-material";
-import { LineChart } from "../components/UI/lineChart";
+import LineChart from "../components/UI/lineChart";
 import { RevenueCard } from "../components/UI/revenueCard";
 import ClickableAction from "../components/UI/iconsComponents/clickableAction";
 import analyticsStyle from "../styles/components/analytics.module.css";
