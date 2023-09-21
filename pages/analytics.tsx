@@ -19,7 +19,7 @@ import { PeriodToDifferenceLabel, getDifference } from "../utils/period";
 import { useAccount, useContractWrite } from "@starknet-react/core";
 import Error from "./error";
 import { useRemainingBalance } from "../hooks/metrics";
-import { hexToDecimal } from "../utils/feltService";
+import { gweiToEth, hexToDecimal } from "../utils/feltService";
 import { toReadablePrice } from "../utils/priceService";
 import { useDisplayName } from "../hooks/displayName";
 
@@ -47,6 +47,7 @@ const Analytics: NextPage = () => {
   const [clicksOverview, setClicksOverview] =
     useState<OverviewProps>(emptyOverview);
   const [chartData, setChartData] = useState<ChartData[]>();
+  const [canClaim, setCanClaim] = useState<boolean>(false);
   const { balance, error } = useRemainingBalance(hexToDecimal(address) ?? "0");
   const { writeAsync: executeClaim } = useContractWrite({
     calls: [
@@ -62,6 +63,16 @@ const Analytics: NextPage = () => {
     if (!balance || error) return 0;
     return toReadablePrice(Number(balance));
   }, [balance]);
+
+  useEffect(() => {
+    if (!balance || error) setCanClaim(false);
+    else if (
+      Number(balance) === 0 ||
+      Number(gweiToEth(balance.toString())) < 0.1
+    )
+      setCanClaim(false);
+    else setCanClaim(true);
+  }, [balance, error]);
 
   const sinceDate = useMemo(() => {
     const today = new Date();
@@ -274,9 +285,10 @@ const Analytics: NextPage = () => {
                 <div className={helper.col}>
                   <ClickableAction
                     icon={<Paid />}
-                    title="Claim your income"
+                    title={canClaim ? "Claim your income" : "Not enough income"}
                     width="auto"
-                    onClick={executeClaim}
+                    onClick={canClaim ? executeClaim : undefined}
+                    style={canClaim ? "primary" : "disabled"}
                   />
                 </div>
               </div>

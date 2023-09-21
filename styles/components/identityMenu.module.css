@@ -4,7 +4,8 @@
   align-items: center;
 }
 .clickableActionPrimary,
-.clickableActionSecondary {
+.clickableActionSecondary,
+.clickableActionDisabled {
   /* Frame 2 */
   box-sizing: border-box;
 
@@ -39,6 +40,14 @@
   align-self: stretch;
   flex-grow: 0;
   cursor: pointer;
+
+  color: #402d28;
+}
+
+.clickableActionDisabled {
+  background: #CDCCCC;
+  color: #FFFFFF;
+  cursor: not-allowed;
 }
 
 .clickableActionAutoWidth {
@@ -61,10 +70,7 @@
   line-height: 24px;
   text-align: left;
   /* identical to box height, or 150% */
-
-  /* Secondary/700 */
-  color: #402d28;
-
+  
   /* Inside auto layout */
 
   flex: none;
@@ -86,7 +92,8 @@
 }
 
 .clickableIconPrimary,
-.clickableIconSecondary {
+.clickableIconSecondary,
+.clickableIconDisabled {
   background-color: var(--primary300);
   display: flex;
   align-items: center;
@@ -96,7 +103,8 @@
   height: 45px;
 }
 
-.clickableIconSecondary {
+.clickableIconSecondary,
+.clickableIconDisabled {
   background-color: var(--secondary300);
 }
 
