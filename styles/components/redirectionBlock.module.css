@@ -2,8 +2,14 @@
   background-color: var(--green);
 }
 
-.secondary {
+.telegram {
   background-color: var(--blue);
+}
+
+.secondary {
+  background-color: var(--background-light);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .card {
@@ -17,6 +23,19 @@
   overflow: hidden;
   height: 100%;
   min-height: 340px;
+}
+
+.revenueCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 100%;
+  min-height: 702px;
 }
 
 .bottomLeftLeaf {

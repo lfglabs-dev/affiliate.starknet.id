@@ -6,7 +6,7 @@ type ClickableActionProps = {
   onClick?: () => void;
   title?: string;
   description?: string;
-  style?: "primary" | "secondary";
+  style?: "primary" | "secondary" | "disabled";
   width?: "fixed" | "auto";
   logoBackgroundColor?: string;
 };
@@ -23,8 +23,8 @@ const ClickableAction: FunctionComponent<ClickableActionProps> = ({
   return (
     <div
       className={`${
-        style === "secondary"
-          ? styles.clickableActionSecondary
+        style === "disabled"
+          ? styles.clickableActionDisabled
           : styles.clickableActionPrimary
       }
         ${width === "auto" ? styles.clickableActionAutoWidth : ""}`}
@@ -32,8 +32,8 @@ const ClickableAction: FunctionComponent<ClickableActionProps> = ({
     >
       <div
         className={
-          style === "secondary"
-            ? styles.clickableIconSecondary
+          style === "disabled"
+            ? styles.clickableIconDisabled
             : styles.clickableIconPrimary
         }
         style={{ backgroundColor: logoBackgroundColor }}

@@ -7,7 +7,7 @@ import Button from "./button";
 import {
   useConnectors,
   useAccount,
-  useStarknet,
+  useProvider,
   useTransactionManager,
 } from "@starknet-react/core";
 import Wallets from "./wallets";
@@ -17,6 +17,7 @@ import { useDisplayName } from "../../hooks/displayName";
 import { CircularProgress } from "@mui/material";
 import ModalWallet from "./modalWallet";
 import { useRouter } from "next/router";
+import { constants } from "starknet";
 
 const Navbar: FunctionComponent = () => {
   const router = useRouter();
@@ -26,7 +27,7 @@ const Navbar: FunctionComponent = () => {
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [isWrongNetwork, setIsWrongNetwork] = useState(false);
   const { available, connect, disconnect } = useConnectors();
-  const { library } = useStarknet();
+  const { provider } = useProvider();
   const domainOrAddress = useDisplayName(address ?? "");
   const green = "#19AA6E";
   const brown = "#402d28";
@@ -49,22 +50,15 @@ const Navbar: FunctionComponent = () => {
   useEffect(() => {
     if (!isConnected) return;
 
-    const STARKNET_NETWORK = {
-      mainnet: "0x534e5f4d41494e",
-      testnet: "0x534e5f474f45524c49",
-    };
-
-    if (library.chainId === STARKNET_NETWORK.testnet && network === "mainnet") {
-      setIsWrongNetwork(true);
-    } else if (
-      library.chainId === STARKNET_NETWORK.mainnet &&
-      network === "testnet"
-    ) {
-      setIsWrongNetwork(true);
-    } else {
-      setIsWrongNetwork(false);
-    }
-  }, [library, network, isConnected]);
+    provider.getChainId().then((chainId) => {
+      const isWrongNetwork =
+        (chainId === constants.StarknetChainId.SN_GOERLI &&
+          network === "mainnet") ||
+        (chainId === constants.StarknetChainId.SN_MAIN &&
+          network === "testnet");
+      setIsWrongNetwork(isWrongNetwork);
+    });
+  }, [provider, network, isConnected]);
 
   function disconnectByClick(): void {
     disconnect();
@@ -121,11 +115,8 @@ const Navbar: FunctionComponent = () => {
               <Link href="/">
                 <li className={styles.menuItem}>Affiliate Space</li>
               </Link>
-              <Link href="/analytics">
+              {/* <Link href="/analytics">
                 <li className={styles.menuItem}>Analytics</li>
-              </Link>
-              {/* <Link href="/jointhetribe">
-                <li className={styles.menuItem}>Join the tribe</li>
               </Link> */}
               <div className="text-background ml-10 mr-5">
                 <Button
@@ -217,20 +208,12 @@ const Navbar: FunctionComponent = () => {
                       Affiliate Space
                     </li>
                   </Link>
-                  <Link href="/analytics">
+                  {/* <Link href="/analytics">
                     <li
                       onClick={() => setNav(false)}
                       className={styles.menuItemSmall}
                     >
                       Analytics
-                    </li>
-                  </Link>
-                  {/* <Link href="/jointhetribe">
-                    <li
-                      onClick={() => setNav(false)}
-                      className={styles.menuItemSmall}
-                    >
-                      Tribe
                     </li>
                   </Link> */}
                 </ul>

@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "../../styles/components/walletMessage.module.css";
 import { FunctionComponent } from "react";
 import { Modal } from "@mui/material";
-import {
-  UseTransactionResult,
-  useAccount,
-  useTransactions,
-} from "@starknet-react/core";
+import { useAccount, useTransactions } from "@starknet-react/core";
 import { ContentCopy } from "@mui/icons-material";
 import CopiedIcon from "./iconsComponents/icons/copiedIcon";
 import ClickableAction from "./iconsComponents/clickableAction";
@@ -81,7 +77,7 @@ const ModalWallet: FunctionComponent<ModalWalletProps> = ({
         </button>
         <div className={styles.menu_title}>
           <div className={styles.menu_title}>
-            {connector && connector.id() === "braavos" ? (
+            {connector && connector.id === "braavos" ? (
               <img
                 width={"25px"}
                 src="/visuals/braavosLogo.svg"

@@ -26,10 +26,11 @@ export const IdentitySection: FC<IdentitySectionProps> = ({
             THE STARK AFFILIATE PROGRAM
           </h1>
           <p className="text-small mb-4">
-            Empower your Earnings with StarknetID! Our contract-based referral
-            system is your opportunity to earn and contribute to the growth of
-            the StarknetID ecosystem. Together, we can revolutionize the Web3
-            space.
+            Empower your Earnings with StarknetID! Our contract-based affiliate
+            system is your opportunity to earn while contributing to the growth
+            of the Starknet Ecosystem. Each sale made by your referral link will
+            permit you to earn 25% of the sale value in ETH while users that you
+            refer will also generate up to 25% more revenue for you.
           </p>
           <AffiliateLink link={affiliateLink} domain={domain} />
         </div>
