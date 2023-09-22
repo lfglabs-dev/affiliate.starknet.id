@@ -45,9 +45,10 @@
 }
 
 .clickableActionDisabled {
-  background: #CDCCCC;
-  color: #FFFFFF;
+  background: var(--secondary300);
+  color: var(--secondary-500);
   cursor: not-allowed;
+  border-width: 0px;
 }
 
 .clickableActionAutoWidth {
@@ -70,7 +71,7 @@
   line-height: 24px;
   text-align: left;
   /* identical to box height, or 150% */
-  
+
   /* Inside auto layout */
 
   flex: none;
@@ -94,7 +95,7 @@
 .clickableIconPrimary,
 .clickableIconSecondary,
 .clickableIconDisabled {
-  background-color: var(--primary300);
+  background-color: var(--secondary300);
   display: flex;
   align-items: center;
   justify-content: center;

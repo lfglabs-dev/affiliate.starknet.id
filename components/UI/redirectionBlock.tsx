@@ -7,9 +7,9 @@ interface RedirectionBlockProps {
   title: string;
   description: string;
   buttonText: string;
-  buttonLink: string;
+  buttonAction: () => void;
   buttonLogo: ReactNode;
-  style?: "primary" | "secondary";
+  style?: "primary" | "telegram";
   displayLeaves?: boolean;
   buttonLogoBackgroundColor?: string;
 }
@@ -17,7 +17,7 @@ interface RedirectionBlockProps {
 export const RedirectionBlock: FC<RedirectionBlockProps> = ({
   title,
   description,
-  buttonLink,
+  buttonAction,
   buttonText,
   buttonLogo,
   style = "primary",
@@ -27,7 +27,7 @@ export const RedirectionBlock: FC<RedirectionBlockProps> = ({
   return (
     <div
       className={`${styles.card} ${
-        style === "primary" ? styles.primary : styles.secondary
+        style === "primary" ? styles.primary : styles.telegram
       } flex flex-1 flex-grow rounded-lg p-6 px-8`}
     >
       <div
@@ -35,7 +35,7 @@ export const RedirectionBlock: FC<RedirectionBlockProps> = ({
       >
         <h4>{title}</h4>
         <p className="text-small mt-5 mb-2 leading-6">{description}</p>
-        <Link href={buttonLink}>
+        <div onClick={buttonAction}>
           <ClickableAction
             onClick={() => console.log("click")}
             title={buttonText}
@@ -43,7 +43,7 @@ export const RedirectionBlock: FC<RedirectionBlockProps> = ({
             style="primary"
             logoBackgroundColor={buttonLogoBackgroundColor}
           />
-        </Link>
+        </div>
       </div>
       {displayLeaves && (
         <>
