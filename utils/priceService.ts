@@ -26,3 +26,7 @@ export function getYearlyPriceFromDomain(domain: string): number {
       return PRICES.FIVE;
   }
 }
+
+export function toReadablePrice(num: number): number {
+  return parseFloat((num / 1e18).toFixed(6));
+}

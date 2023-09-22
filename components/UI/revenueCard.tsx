@@ -9,7 +9,7 @@ export const RevenueCard: FC<RevenueCardProps> = ({ title, revenue }) => {
   return (
     <div className={style.card}>
       <p>{title}</p>
-      <h1>${revenue}</h1>
+      <h1>{revenue} ETH</h1>
       <>
         <div className={style.topLeftLeaf}>
           <img width="100%" alt="leaf" src="/leaves/new/leaf04.svg" />

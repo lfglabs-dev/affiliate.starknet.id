@@ -115,11 +115,8 @@ const Navbar: FunctionComponent = () => {
               <Link href="/">
                 <li className={styles.menuItem}>Affiliate Space</li>
               </Link>
-              <Link href="/analytics">
+              {/* <Link href="/analytics">
                 <li className={styles.menuItem}>Analytics</li>
-              </Link>
-              {/* <Link href="/jointhetribe">
-                <li className={styles.menuItem}>Join the tribe</li>
               </Link> */}
               <div className="text-background ml-10 mr-5">
                 <Button
@@ -211,20 +208,12 @@ const Navbar: FunctionComponent = () => {
                       Affiliate Space
                     </li>
                   </Link>
-                  <Link href="/analytics">
+                  {/* <Link href="/analytics">
                     <li
                       onClick={() => setNav(false)}
                       className={styles.menuItemSmall}
                     >
                       Analytics
-                    </li>
-                  </Link>
-                  {/* <Link href="/jointhetribe">
-                    <li
-                      onClick={() => setNav(false)}
-                      className={styles.menuItemSmall}
-                    >
-                      Tribe
                     </li>
                   </Link> */}
                 </ul>
