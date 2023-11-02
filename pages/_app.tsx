@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Navbar from "../components/UI/navbar";
@@ -9,7 +9,6 @@ import { InjectedConnector, StarknetConfig } from "@starknet-react/core";
 import { Analytics } from "@vercel/analytics/react";
 import { StarknetIdJsProvider } from "../context/StarknetIdJsProvider";
 import posthog from "posthog-js";
-import { useRouter } from "next/router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Wallet Connectors
@@ -29,8 +28,8 @@ if (typeof window !== "undefined") {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const router = useRouter();
   const queryClient = new QueryClient();
+  const AnyComponent = Component as any;
 
   return (
     <>
@@ -46,7 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 />
               </Head>
               <Navbar />
-              <Component {...pageProps} />
+              <AnyComponent {...pageProps} />
             </ThemeProvider>
             <Analytics />
           </StarknetIdJsProvider>
