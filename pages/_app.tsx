@@ -29,7 +29,7 @@ if (typeof window !== "undefined") {
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient();
-  const AnyComponent = (<Component />) as any;
+  const AnyComponent = Component as any;
 
   return (
     <>
