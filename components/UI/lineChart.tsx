@@ -72,17 +72,15 @@ const LineChart = memo<LineChartProps>(
           </div>
         </div>
         <div className={style.chartWrapper}>
-          {chartData
-            ? ((
-                <MemoizedApexCharts
-                  options={chartOptions as ApexOptions}
-                  series={chartData as any}
-                  type="area"
-                  width="100%"
-                  height="100%"
-                />
-              ) as ReactElement)
-            : null}
+          {/* {chartData ? (
+            <MemoizedApexCharts
+              options={chartOptions as ApexOptions}
+              series={chartData as any}
+              type="area"
+              width="100%"
+              height="100%"
+            />
+          ) : null} */}
         </div>
       </div>
     );
