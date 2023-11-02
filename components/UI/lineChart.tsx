@@ -79,7 +79,7 @@ const LineChart = memo<LineChartProps>(
               type="area"
               width="100%"
               height="100%"
-            />
+            ></MemoizedApexCharts>
           ) : null}
         </div>
       </div>
