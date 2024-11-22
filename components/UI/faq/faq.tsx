@@ -13,7 +13,7 @@ export const FaqBoard: FC<FaqBoardProps> = ({ faq }) => {
       
       
       <div className="mb-8">
-        <p className="text-sm text-gray-600 mb-2 mt-4">Find quick answers</p>
+        <p className="text-sm text-gray-600 mb-2 mt-2">Find quick answers</p>
         <h1 className="text-3xl font-extrabold text-center">FREQUENTLY ASKED QUESTION</h1>
       </div>
 
