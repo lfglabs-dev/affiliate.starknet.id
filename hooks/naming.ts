@@ -91,7 +91,7 @@ export function useTokenIdFromDomain(domain: string): TokenIdData {
         .catch((err) => {
           setError(err);
         });
-      setTokenId(token as number);
+      setTokenId(Number(token));
     };
     fetchAddress();
   }, [starknetIdNavigator, domain]);
