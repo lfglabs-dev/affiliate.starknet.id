@@ -2,7 +2,6 @@ import { FC } from "react";
 import { FAQ } from "../../../types/faq/types";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import PlusIcon from "../iconsComponents/icons/plusIcon";
-import style from "../../../styles/components/faqBoard.module.css";
 
 interface FaqBoardProps {
   faq: FAQ[];
@@ -10,38 +9,38 @@ interface FaqBoardProps {
 
 export const FaqBoard: FC<FaqBoardProps> = ({ faq }) => {
   return (
-    <div
-      className={`${style.container} flex flex-col justify-center items-start p-4`}
-    >
-      <h4>Frequently asked question</h4>
-      <div className="mt-5">
-        {faq.map((faq, index) => (
+    <div className="w-full max-w-[1184px] max-h-[663px] mx-auto bg-[#FEF7F1] rounded-lg p-8 overflow-hidden">
+      
+      <div className="mb-8">
+        <p className="text-sm text-gray-600 mb-2">Find quick answers</p>
+        <h1 className="text-3xl font-extrabold text-center">FREQUENTLY ASKED QUESTION</h1>
+      </div>
+
+      <div className="space-y-6 shadow-[0px_14px_39px_0px_rgba(0,0,0,0.1)] px-[24px] pt-[24px]">
+        {faq.map((item, index) => (
           <Accordion
-            className="bg-transparent shadow-none"
             key={index}
+            className="bg-transparent shadow-none before:hidden"
             disableGutters={true}
             square
           >
             <AccordionSummary
               expandIcon={
-                <div className={style.button}>
+                <div className="w-6 h-6 flex items-center justify-center border border-gray-600 rounded-md ">
                   <PlusIcon width="10" />
                 </div>
               }
+              className="p-0 hover:bg-transparent min-h-0"
             >
-              <div className={`${style.labelBox} py-5`}>
-                <div className={style.faqHeader}>
-                  <h2 className={style.faqTitle}>{`0${index + 1}`}</h2>
-                  <div className={style.faqButton}>
-                    <PlusIcon width="10" />
-                  </div>
-                </div>
-                <h2 className={`${style.title} mr-6`}>{`0${index + 1}`}</h2>
-                <p className="text-default text-left">{faq.question}</p>
+              <div className="flex items-center gap-4">
+                <span className="text-2xl font-bold text-gray-800 min-w-[40px]">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <p className="text-lg font-medium text-gray-800">{item.question}</p>
               </div>
             </AccordionSummary>
-            <AccordionDetails>
-              <p className="text-sm text-left">{faq.answer}</p>
+            <AccordionDetails className="pl-[64px] pt-2 pb-4">
+              <p className="text-gray-600">{item.answer}</p>
             </AccordionDetails>
           </Accordion>
         ))}
@@ -49,3 +48,5 @@ export const FaqBoard: FC<FaqBoardProps> = ({ faq }) => {
     </div>
   );
 };
+
+
