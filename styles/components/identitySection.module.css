@@ -23,6 +23,18 @@
   padding: -5em;
 }
 
+.accent {
+  color: var(--primary);
+}
+
+.paragraph {
+  color: var(--light-brown);
+}
+
+.commission {
+  color: var(--grey);
+}
+
 .column {
   display: flex;
   flex-direction: column;
@@ -34,7 +46,7 @@
 }
 
 .title {
-  padding-top: 10px;
+  padding-top: 5px;
   padding-bottom: 10px;
 }
 
@@ -65,6 +77,7 @@
     width: 100%;
     min-height: 250px;
   }
+
 
   .hexagon {
     position: absolute;
