@@ -41,7 +41,7 @@ export const FaqBoard: FC<FaqBoardProps> = ({ faq }) => {
               </div>
             </AccordionSummary>
             <AccordionDetails className="pl-[64px] pt-2 pb-4">
-              <p className="text-gray-600">{faq.answer}</p>
+              <p className="text-gray-600 text-left">{faq.answer}</p>
             </AccordionDetails>
           </Accordion>
         ))}
