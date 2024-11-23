@@ -2,6 +2,8 @@ import { FC, useCallback, useState } from "react";
 import style from "../../styles/components/affiliateLink.module.css";
 import { Button } from "@mui/base";
 import CopyIcon from "./iconsComponents/icons/copyIcon";
+import theme from "../../styles/theme";
+import CopiedIcon from "./iconsComponents/icons/copiedIcon";
 
 interface AffiliateLinkProps {
   link: string;
@@ -10,7 +12,7 @@ interface AffiliateLinkProps {
 
 export const AffiliateLink: FC<AffiliateLinkProps> = ({ link, domain }) => {
   const [copied, setCopied] = useState(false);
-  const linkToShow = `https://app.starknet.id/${domain}`;
+  const linkToShow = `${process.env.NEXT_PUBLIC_APP_LINK}/${domain}`;
 
   const handleClick = useCallback(() => {
     if (!link) return;
@@ -27,9 +29,9 @@ export const AffiliateLink: FC<AffiliateLinkProps> = ({ link, domain }) => {
         {linkToShow.substring(8, linkToShow.length)}
       </p>
       {copied ? (
-        <span className="text-xs font-bold">Copied!</span>
+        <CopiedIcon width="25" color={theme.palette.primary.main} />
       ) : (
-        <CopyIcon width="25" />
+        <CopyIcon width="25" color={theme.palette.primary.main} />
       )}
     </Button>
   );
