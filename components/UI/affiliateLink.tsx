@@ -1,9 +1,7 @@
 import { FC, useCallback, useState } from "react";
 import style from "../../styles/components/affiliateLink.module.css";
-import { ContentCopy } from "@mui/icons-material";
 import { Button } from "@mui/base";
-import CopiedIcon from "./iconsComponents/icons/copiedIcon";
-import theme from "../../styles/theme";
+import CopyIcon from "./iconsComponents/icons/copyIcon";
 
 interface AffiliateLinkProps {
   link: string;
@@ -12,7 +10,7 @@ interface AffiliateLinkProps {
 
 export const AffiliateLink: FC<AffiliateLinkProps> = ({ link, domain }) => {
   const [copied, setCopied] = useState(false);
-  const linkToShow = `${process.env.NEXT_PUBLIC_APP_LINK}/${domain}`;
+  const linkToShow = `https://app.starknet.id/${domain}`;
 
   const handleClick = useCallback(() => {
     if (!link) return;
@@ -24,14 +22,14 @@ export const AffiliateLink: FC<AffiliateLinkProps> = ({ link, domain }) => {
   }, [link]);
 
   return (
-    <Button className={style.button} onClick={handleClick}>
-      <p className="text-default mr-2">
+    <Button className={`${style.button} ml-[-0.5rem] mt-4 min-h-[30px] h-[30px]`} onClick={handleClick}>
+      <p className="text-default lg:mr-2 mr-1">
         {linkToShow.substring(8, linkToShow.length)}
       </p>
       {copied ? (
-        <CopiedIcon width="25" color={theme.palette.primary.main} />
+        <span className="text-xs font-bold">Copied!</span>
       ) : (
-        <ContentCopy width="25" />
+        <CopyIcon width="25" />
       )}
     </Button>
   );
