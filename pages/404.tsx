@@ -4,9 +4,9 @@ import styles from "../styles/Home.module.css";
 
 const NotFound: NextPage = () => {
   return (
-    <div className={styles.screen}>
+    <div className={`${styles.screen}`}>
       <div className={styles.wrapperScreen}>
-        <div className="flex flex-col items-center justify-center h-full">
+        <div className="flex flex-col items-center justify-center">
           <img 
             src="/visuals/404illu.webp" 
             alt="error illustration"
