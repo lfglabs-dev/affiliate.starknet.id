@@ -118,7 +118,7 @@ const Navbar: FunctionComponent = () => {
               {/* <Link href="/analytics">
                 <li className={styles.menuItem}>Analytics</li>
               </Link> */}
-              <div className="text-background ml-10 mr-5">
+              <div className="text-beige ml-10 mr-5">
                 <Button
                   onClick={
                     isConnected
@@ -127,6 +127,7 @@ const Navbar: FunctionComponent = () => {
                       ? () => connect(available[0])
                       : () => setHasWallet(true)
                   }
+                  variation={isConnected ? "white" : "primary"}
                 >
                   {isConnected ? (
                     <>
