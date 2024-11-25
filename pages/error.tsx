@@ -1,4 +1,6 @@
 import React, { FunctionComponent } from "react";
+import styles from "../styles/Home.module.css";
+import errorStyle from "../styles/components/error.module.css";
 
 
 const NotFound: FunctionComponent = () => {
