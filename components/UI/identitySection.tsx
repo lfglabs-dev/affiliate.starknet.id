@@ -17,20 +17,16 @@ export const IdentitySection: FC<IdentitySectionProps> = ({
   return (
     <div className={style.section}>
       <div className={style.column}>
-        <div className="p-10 py-5">
+        <div className="px-5 py-6">
           <div className="flex flex-row items-center">
             <ColoredStarknetIcon width="16" />
             <p className="ml-1 text-micro">{domain}</p>
           </div>
-          <h1 className={`${style.title} uppercase font-bold`}>
-            THE STARK AFFILIATE PROGRAM
+          <h1 className={`${style.title} uppercase font-bold tracking-wide leading-normal`}>
+            THE STARK AFFILIATE <span className={style.accent}>PROGRAM</span>
           </h1>
-          <p className="text-small mb-4">
-            Empower your Earnings with StarknetID! Our contract-based affiliate
-            system is your opportunity to earn while contributing to the growth
-            of the Starknet Ecosystem. Each sale made by your referral link will
-            permit you to earn 25% of the sale value in ETH while users that you
-            refer will also generate up to 25% more revenue for you.
+          <p className={`${style.paragraph} text-small max-w-[58ch]`}>
+            Earn <span className={style.commission}><strong>25%</strong></span> commission in ETH on sales through your referral link, plus up to <span className={style.commission}><strong>25%</strong></span> extra from your referrals’ revenue.
           </p>
           <AffiliateLink link={affiliateLink} domain={domain} />
         </div>

@@ -1,9 +1,9 @@
 import { FC, useCallback, useState } from "react";
 import style from "../../styles/components/affiliateLink.module.css";
-import { ContentCopy } from "@mui/icons-material";
 import { Button } from "@mui/base";
-import CopiedIcon from "./iconsComponents/icons/copiedIcon";
+import CopyIcon from "./iconsComponents/icons/copyIcon";
 import theme from "../../styles/theme";
+import CopiedIcon from "./iconsComponents/icons/copiedIcon";
 
 interface AffiliateLinkProps {
   link: string;
@@ -24,14 +24,14 @@ export const AffiliateLink: FC<AffiliateLinkProps> = ({ link, domain }) => {
   }, [link]);
 
   return (
-    <Button className={style.button} onClick={handleClick}>
-      <p className="text-default mr-2">
+    <Button className={`${style.button} ml-[-0.5rem] mt-4 min-h-[30px] h-[30px]`} onClick={handleClick}>
+      <p className="text-default lg:mr-2 mr-1">
         {linkToShow.substring(8, linkToShow.length)}
       </p>
       {copied ? (
         <CopiedIcon width="25" color={theme.palette.primary.main} />
       ) : (
-        <ContentCopy width="25" />
+        <CopyIcon width="25" color={theme.palette.primary.main} />
       )}
     </Button>
   );
