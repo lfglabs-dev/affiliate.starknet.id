@@ -54,10 +54,9 @@ a {
 .title {
   font-family: "QuickZap";
   font-size: 2.5rem;
-  color: var(--primary);
+  color: var(--secondary);
   text-shadow: 1px 1px var(--tertiary);
   text-transform: uppercase;
-  text-align: center;
 }
 
 /* Scroll bar */
