@@ -9,7 +9,7 @@ const NotFound: FunctionComponent = () => {
       <div className={errorStyle.main}>
         <div className="flex flex-col items-center justify-center">
           <img 
-            src="/visuals/errorillu.webp" 
+            src="/visuals/errorIllu.webp" 
             alt="error illustration"
             height={300} 
             width={300}
