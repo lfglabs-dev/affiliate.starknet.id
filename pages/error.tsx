@@ -16,7 +16,7 @@ const NotFound: FunctionComponent = () => {
           />
           <div className="text-center">
             <h1 className="title text-center">Oh no... access error!</h1>
-            <p className="mt-2">To access to your stark affiliate space you need to connect to a
+            <p className="mt-2">To access your stark affiliate space, you need to connect to a
             starknet wallet</p>
           </div>
         </div>
