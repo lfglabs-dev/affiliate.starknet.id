@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState, useMemo, useEffect } from "react";
 import { AffiliateLink } from "./affiliateLink";
 import style from "../../styles/components/identitySection.module.css";
 import ColoredStarknetIcon from "./iconsComponents/icons/coloredStarknetIcon";
@@ -6,6 +6,10 @@ import DollarIcon from "./iconsComponents/icons/dollarIcon";
 import InfoIcon from "./iconsComponents/icons/infoIcon";
 import AffiliateButton from "./affiliateButton";
 import DownloadButtonIcon from "./iconsComponents/icons/downloadButton";
+import { useAccount, useContractWrite } from "@starknet-react/core";
+import { useRemainingBalance } from "../../hooks/metrics";
+import { toReadablePrice } from "../../utils/priceService";
+import { gweiToEth, hexToDecimal } from "../../utils/feltService";
 
 interface IdentitySectionProps {
 	domain: string;
@@ -13,7 +17,43 @@ interface IdentitySectionProps {
 	tokenId: number;
 }
 
+const downloadMediaKit = () => {
+	// Create a link element
+	const link = document.createElement("a");
+
+	// Set the link's href to the file's path
+	link.href = "/affiliationMediaKit.zip";
+
+	// Set the download attribute to the desired file name
+	link.download = "affiliationMediaKit.zip";
+
+	// Append the link to the document
+	document.body.appendChild(link);
+
+	// Trigger the download by simulating a click on the link
+	link.click();
+
+	// Remove the link from the document
+	document.body.removeChild(link);
+};
+
 export const IdentitySection: FC<IdentitySectionProps> = ({ domain, affiliateLink, tokenId }) => {
+	const { address } = useAccount();
+	const { balance, error } = useRemainingBalance(hexToDecimal(address) ?? "0");
+	const remainingBalance = useMemo(() => {
+		if (!balance || error) return 0;
+		return toReadablePrice(Number(balance));
+	}, [balance]);
+
+	const { writeAsync: executeClaim } = useContractWrite({
+		calls: [
+			{
+				contractAddress: process.env.NEXT_PUBLIC_REFERRAL_CONTRACT as string,
+				entrypoint: "claim",
+				calldata: [],
+			},
+		],
+	});
 	return (
 		<div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
 			<div className={`${style.section} col-span-3`}>
@@ -49,12 +89,13 @@ export const IdentitySection: FC<IdentitySectionProps> = ({ domain, affiliateLin
 								</div>
 							</div>
 							<h1 className={` uppercase font-bold`}>
-								0.048<span className="text-small pl-2">ETH</span>
+								{remainingBalance}
+								<span className="text-small pl-2">ETH</span>
 							</h1>
 						</div>
-						<div onClick={() => window.open("https://desktop.telegram.org/")}>
+						<div>
 							<AffiliateButton
-								onClick={() => console.log("click")}
+								onClick={() => executeClaim()}
 								title={"CLAIM"}
 								icon={
 									<DollarIcon
@@ -62,7 +103,6 @@ export const IdentitySection: FC<IdentitySectionProps> = ({ domain, affiliateLin
 										color="white"
 									/>
 								}
-								// style="secondary"
 								logoBackgroundColor={"#fff"}
 							/>
 						</div>
@@ -83,9 +123,9 @@ export const IdentitySection: FC<IdentitySectionProps> = ({ domain, affiliateLin
 								23<span className="text-small pl-2">items</span>
 							</h1>
 						</div>
-						<div onClick={() => window.open("https://desktop.telegram.org/")}>
+						<div>
 							<AffiliateButton
-								onClick={() => console.log("click")}
+								onClick={() => downloadMediaKit()}
 								title={"DOWNLOAD"}
 								icon={
 									<DownloadButtonIcon
