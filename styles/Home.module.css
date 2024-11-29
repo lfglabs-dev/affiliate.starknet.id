@@ -1,19 +1,18 @@
 .screen {
-  min-height: 100vh;
-  min-width: 100vw;
+  /* height: 88vh; */
   z-index: 0;
   position: relative;
   padding-top: 12vh;
+  overflow: auto;
   background-color: var(--background);
-  overflow: scroll;
 }
 
 .wrapperScreen {
   display: inline-flex;
   flex-direction: column;
   width: 100%;
-  height: calc(100% - 12vh);
   justify-content: center;
+  height: calc(100% - 12vh);
 }
 
 .containerScreen,
@@ -51,7 +50,6 @@
   color: var(--primary);
   text-shadow: 1px 1px var(--tertiary);
   text-transform: uppercase;
-  text-align: center;
 }
 
 .cardTitle {

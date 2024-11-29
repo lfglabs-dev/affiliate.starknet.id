@@ -20,6 +20,7 @@
 :root {
   --primary: #19aa6e;
   --primary300: #dcf2e9;
+  --primary600: #0c8654;
   --secondary: #402d28;
   --secondary300: #eae0d5;
   --tertiary: #bf9e7b;
@@ -30,6 +31,8 @@
   --blue: #204f6c;
   --green: #284028;
   --red: #d21313;
+  --light-brown: #8C8989;
+  --grey: #454545;
 }
 
 html,
@@ -53,10 +56,9 @@ a {
 .title {
   font-family: "QuickZap";
   font-size: 2.5rem;
-  color: var(--primary);
+  color: var(--secondary);
   text-shadow: 1px 1px var(--tertiary);
   text-transform: uppercase;
-  text-align: center;
 }
 
 /* Scroll bar */
