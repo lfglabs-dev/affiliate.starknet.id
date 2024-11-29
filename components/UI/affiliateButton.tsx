@@ -1,7 +1,7 @@
 import React, { FunctionComponent, ReactNode } from "react";
 import styles from "../../styles/components/affiliateButton.module.css";
 
-type ClickableActionProps = {
+type AffiliateButtonProps = {
 	icon: ReactNode;
 	onClick?: () => void;
 	title?: string;
@@ -10,11 +10,11 @@ type ClickableActionProps = {
 	logoBackgroundColor?: string;
 };
 
-const AffiliateButton: FunctionComponent<ClickableActionProps> = ({ icon, onClick, title, description, style = "secondary", logoBackgroundColor }) => {
+const AffiliateButton: FunctionComponent<AffiliateButtonProps> = ({ icon, onClick, title, description, style = "secondary", logoBackgroundColor }) => {
 	return (
 		<div
 			className={`${style === "disabled" ? styles.clickableActionDisabled : styles.clickableActionPrimary}
-        w-[136px]`}
+        w-fit`}
 			onClick={onClick}>
 			<div className={styles.clickableIconPrimary}>{icon}</div>
 

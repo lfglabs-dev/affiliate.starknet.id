@@ -40,10 +40,16 @@ const downloadMediaKit = () => {
 export const IdentitySection: FC<IdentitySectionProps> = ({ domain, affiliateLink, tokenId }) => {
 	const { address } = useAccount();
 	const { balance, error } = useRemainingBalance(hexToDecimal(address) ?? "0");
+	const [canClaim, setCanClaim] = useState(false);
 	const remainingBalance = useMemo(() => {
 		if (!balance || error) return 0;
 		return toReadablePrice(Number(balance));
 	}, [balance]);
+	useEffect(() => {
+		if (!balance || error) setCanClaim(false);
+		else if (Number(balance) === 0 || Number(gweiToEth(balance.toString())) < 0.1) setCanClaim(false);
+		else setCanClaim(true);
+	}, [balance, error]);
 
 	const { writeAsync: executeClaim } = useContractWrite({
 		calls: [
@@ -95,15 +101,10 @@ export const IdentitySection: FC<IdentitySectionProps> = ({ domain, affiliateLin
 						</div>
 						<div>
 							<AffiliateButton
-								onClick={() => executeClaim()}
-								title={"CLAIM"}
-								icon={
-									<DollarIcon
-										width="16px"
-										color="white"
-									/>
-								}
-								logoBackgroundColor={"#fff"}
+								onClick={canClaim ? executeClaim : undefined}
+								title={canClaim ? "ClAIM" : "Nothing to claim"}
+								icon={<DollarIcon width="16px" />}
+								style={canClaim ? "primary" : "disabled"}
 							/>
 						</div>
 					</div>
