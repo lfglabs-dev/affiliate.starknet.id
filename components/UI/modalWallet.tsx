@@ -6,7 +6,6 @@ import { useAccount, useTransactions } from "@starknet-react/core";
 import { ContentCopy } from "@mui/icons-material";
 import CopiedIcon from "./iconsComponents/icons/copiedIcon";
 import ClickableAction from "./iconsComponents/clickableAction";
-import { CommonTransactionReceiptResponse } from "starknet";
 import CloseIcon from "./iconsComponents/icons/closeIcon";
 import ArgentIcon from "./iconsComponents/icons/argentIcon";
 import theme from "../../styles/theme";
@@ -133,9 +132,7 @@ const ModalWallet: FunctionComponent<ModalWalletProps> = ({
                         )}
                     </a>
                     <div>
-                      {tx.status === "success" &&
-                        tx.data &&
-                        (tx.data as CommonTransactionReceiptResponse).status}
+                      {tx.isSuccess && tx.status && tx.status}
                     </div>
                   </div>
                 );
