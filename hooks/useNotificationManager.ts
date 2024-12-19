@@ -3,12 +3,12 @@ import { useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { useEffect } from 'react';
 import { hexToDecimal } from '../utils/feltService';
-import { NotificationType } from '../utils/constants';
 import {
   RejectedTransactionReceiptResponse,
   RevertedTransactionReceiptResponse,
   TransactionType,
 } from 'starknet';
+import { NotificationType } from '../types/frontTypes';
 
 export type NotificationData = TransactionData;
 

@@ -52,3 +52,7 @@ type ChartData = {
   name: string;
   data: number[];
 };
+
+export enum NotificationType {
+  TRANSACTION = "TRANSACTION",
+}
