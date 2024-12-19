@@ -1,14 +1,13 @@
-import { useAccount, useProvider } from '@starknet-react/core';
-import { useAtom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
-import { useEffect } from 'react';
-import { hexToDecimal } from '../utils/feltService';
+import { useAccount, useProvider } from "@starknet-react/core";
+import { useAtom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
+import { useEffect } from "react";
+import { hexToDecimal } from "../utils/feltService";
 import {
   RejectedTransactionReceiptResponse,
   RevertedTransactionReceiptResponse,
   TransactionType,
-} from 'starknet';
-import { NotificationType } from '../types/frontTypes';
+} from "starknet";
 
 export type NotificationData = TransactionData;
 
@@ -23,18 +22,18 @@ export type SIDNotification<T> = {
 export type TransactionData = {
   type: TransactionType;
   hash: string;
-  status: 'pending' | 'success' | 'error';
+  status: "pending" | "success" | "error";
   txStatus?:
-    | 'NOT_RECEIVED'
-    | 'RECEIVED'
-    | 'ACCEPTED_ON_L2'
-    | 'ACCEPTED_ON_L1'
-    | 'REJECTED'
-    | 'REVERTED';
+    | "NOT_RECEIVED"
+    | "RECEIVED"
+    | "ACCEPTED_ON_L2"
+    | "ACCEPTED_ON_L1"
+    | "REJECTED"
+    | "REVERTED";
 };
 
 const notificationsAtom = atomWithStorage<SIDNotification<NotificationData>[]>(
-  'userNotifications_SID',
+  "userNotifications_SID",
   []
 );
 
@@ -50,9 +49,11 @@ export function useNotificationManager() {
     ) => {
       if (notification.type !== NotificationType.TRANSACTION) return;
       if (notification.address !== hexToDecimal(address)) return;
-      if (notification.data.status === 'pending') {
+      if (notification.data.status === "pending") {
         const transaction = notification.data;
-        const transactionReceipt = await provider.waitForTransaction(transaction.hash);
+        const transactionReceipt = await provider.waitForTransaction(
+          transaction.hash
+        );
         const updatedTransactions = [...notifications];
 
         if (
@@ -60,7 +61,7 @@ export function useNotificationManager() {
           transactionReceipt.isReverted() ||
           transactionReceipt.isError()
         ) {
-          updatedTransactions[index].data.status = 'error';
+          updatedTransactions[index].data.status = "error";
           transactionReceipt.match({
             rejected: (txR: RejectedTransactionReceiptResponse) => {
               updatedTransactions[index].data.txStatus = txR.status;
@@ -69,15 +70,16 @@ export function useNotificationManager() {
               updatedTransactions[index].data.txStatus = txR.status;
             },
             error: (err: Error) => {
-              console.log('Error while fetching transaction receipt', err);
+              console.log("Error while fetching transaction receipt", err);
               updatedTransactions[index].data.txStatus = undefined;
             },
             success: () => {},
           });
           setNotifications(updatedTransactions);
         } else if (transactionReceipt.isSuccess()) {
-          updatedTransactions[index].data.txStatus = transactionReceipt.finality_status;
-          updatedTransactions[index].data.status = 'success';
+          updatedTransactions[index].data.txStatus =
+            transactionReceipt.finality_status;
+          updatedTransactions[index].data.status = "success";
           setNotifications(updatedTransactions);
         }
       }
@@ -91,11 +93,16 @@ export function useNotificationManager() {
   }, [notifications, address, provider, setNotifications]);
 
   const filteredNotifications = address
-    ? notifications.filter((notification) => notification.address === hexToDecimal(address))
+    ? notifications.filter(
+        (notification) => notification.address === hexToDecimal(address)
+      )
     : [];
 
   const addTransaction = (notification: SIDNotification<NotificationData>) => {
-    setNotifications((prev) => [{ ...notification, address: hexToDecimal(address) }, ...prev]);
+    setNotifications((prev) => [
+      { ...notification, address: hexToDecimal(address) },
+      ...prev,
+    ]);
   };
 
   return {
