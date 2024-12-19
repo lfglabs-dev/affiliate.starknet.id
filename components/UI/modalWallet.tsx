@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "../../styles/components/walletMessage.module.css";
 import { FunctionComponent } from "react";
 import { Modal } from "@mui/material";
-import { useAccount, useTransactions } from "@starknet-react/core";
+import { useAccount } from "@starknet-react/core";
 import { ContentCopy } from "@mui/icons-material";
 import CopiedIcon from "./iconsComponents/icons/copiedIcon";
 import ClickableAction from "./iconsComponents/clickableAction";
@@ -10,13 +10,13 @@ import CloseIcon from "./iconsComponents/icons/closeIcon";
 import ArgentIcon from "./iconsComponents/icons/argentIcon";
 import theme from "../../styles/theme";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { SIDNotification, TransactionData, useNotificationManager } from "../../hooks/useNotificationManager";
 
 type ModalWalletProps = {
   closeModal: () => void;
   open: boolean;
   domain: string;
   disconnectByClick: () => void;
-  hashes: string[];
   setTxLoading: (txLoading: number) => void;
 };
 
@@ -25,8 +25,7 @@ const ModalWallet: FunctionComponent<ModalWalletProps> = ({
   open,
   domain,
   disconnectByClick,
-  hashes,
-  setTxLoading,
+  setTxLoading
 }) => {
   const { address, connector } = useAccount();
   const [copied, setCopied] = useState(false);
@@ -40,27 +39,20 @@ const ModalWallet: FunctionComponent<ModalWalletProps> = ({
       setCopied(false);
     }, 1500);
   };
-  const transactions = useTransactions({ hashes, watch: true });
+  const { notifications } = useNotificationManager();
 
-  // TODO: Check for starknet react fix and delete that code
-  useEffect(() => {
-    const interval = setInterval(() => {
-      for (const tx of transactions) {
-        tx.refetch();
-      }
-    }, 3_000);
-    return () => clearInterval(interval);
-  }, [transactions?.length]);
 
   useEffect(() => {
-    if (transactions) {
-      // Give the number of tx that are loading (I use any because there is a problem on Starknet React types)
+    if (notifications) {
+      // Give the number of tx that are loading
       setTxLoading(
-        transactions.filter((tx) => (tx?.data as any)?.status === "RECEIVED")
-          .length
+        notifications.filter(
+          (notif: SIDNotification<TransactionData>) =>
+            notif.data.status === "pending"
+        ).length
       );
     }
-  }, [transactions]);
+  }, [notifications, setTxLoading]);
 
   return (
     <Modal
@@ -112,27 +104,30 @@ const ModalWallet: FunctionComponent<ModalWalletProps> = ({
         <div className={styles.menu_txs}>
           <div className={styles.tx_title}>My transactions</div>
           <div>
-            {transactions && transactions.length > 0 ? (
-              transactions.map((tx, index) => {
+            {notifications && notifications.length > 0 ? (
+              notifications.map((tx, index) => {
                 return (
                   <div className={styles.menu_tx} key={index}>
                     <a
-                      href={`https://${
-                        network === "testnet" ? "testnet." : ""
-                      }starkscan.co/tx/${tx.data?.transaction_hash}`}
+                      href={`https://${network === "testnet" ? "testnet." : ""
+                        }starkscan.co/tx/${tx.data?.hash}`}
                       className={styles.tx_hash}
                       target="_blank"
                       rel="noreferrer"
                     >
-                      {tx.data?.transaction_hash?.slice(0, 6) +
+                      {tx.data?.hash?.slice(0, 6) +
                         "..." +
-                        tx.data?.transaction_hash?.slice(
-                          tx.data?.transaction_hash.length - 6,
-                          tx.data?.transaction_hash.length
+                        tx.data?.hash?.slice(
+                          tx.data?.hash.length - 6,
+                          tx.data?.hash.length
                         )}
                     </a>
                     <div>
-                      {tx.isSuccess && tx.status && tx.status}
+                      {tx.data.status === "pending"
+                        ? "PENDING"
+                        : tx.data.status === "error"
+                          ? "REJECTED"
+                          : tx.data && tx.data?.txStatus}
                     </div>
                   </div>
                 );

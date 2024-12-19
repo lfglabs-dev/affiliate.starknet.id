@@ -18,7 +18,9 @@
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.10.1",
     "@nimiq/style": "^0.8.4",
-    "@starknet-react/core": "^1.0.3",
+    "@starknet-io/get-starknet-core": "^4.0.0",
+    "@starknet-react/chains": "^3.1.1",
+    "@starknet-react/core": "^3.6.3",
     "@types/lodash": "^4.14.196",
     "@vercel/analytics": "^0.1.5",
     "ajv": "^8.12.0",
@@ -29,6 +31,7 @@
     "bn.js": "^5.2.1",
     "eslint-config-next": "^13.4.7",
     "get-starknet-core": "^3.1.0",
+    "jotai": "^2.10.4",
     "lodash": "^4.17.21",
     "lottie-react": "^2.4.0",
     "mongodb": "^4.12.1",
@@ -42,6 +45,7 @@
     "react-loader-spinner": "^6.1.6",
     "starknet": "^6.11.0",
     "starknetid.js": "^4.0.1",
+    "starknetkit": "^2.6.1",
     "twitter-api-sdk": "^1.2.1"
   },
   "devDependencies": {

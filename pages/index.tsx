@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import type { NextPage } from "next";
 import styles from "../styles/Home.module.css";
 import helper from "../styles/components/helper.module.css";
-import { useAccount, useContractWrite } from "@starknet-react/core";
+import { useAccount } from "@starknet-react/core";
 import { IdentitySection } from "../components/UI/identitySection";
 import { useDisplayName } from "../hooks/displayName";
 import { RedirectionBlock } from "../components/UI/redirectionBlock";

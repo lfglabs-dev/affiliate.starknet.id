@@ -5,11 +5,12 @@ import Navbar from "../components/UI/navbar";
 import Head from "next/head";
 import { ThemeProvider } from "@mui/material";
 import theme from "../styles/theme";
-import { InjectedConnector, StarknetConfig } from "@starknet-react/core";
+import { InjectedConnector, jsonRpcProvider, StarknetConfig } from "@starknet-react/core";
 import { Analytics } from "@vercel/analytics/react";
 import { StarknetIdJsProvider } from "../context/StarknetIdJsProvider";
 import posthog from "posthog-js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Chain, sepolia, mainnet } from "@starknet-react/chains";
 
 // Wallet Connectors
 const connectors = [
@@ -28,13 +29,24 @@ if (typeof window !== "undefined") {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const chains = [mainnet, sepolia];
+  const providers = jsonRpcProvider({
+    rpc: (_chain: Chain) => ({
+      nodeUrl: process.env.NEXT_PUBLIC_RPC_URL as string,
+    }),
+  });
   const queryClient = new QueryClient();
   const AnyComponent = Component as any;
 
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <StarknetConfig connectors={connectors} autoConnect>
+        <StarknetConfig
+          connectors={connectors}
+          autoConnect
+          chains={chains}
+          provider={providers}
+        >
           <StarknetIdJsProvider>
             <ThemeProvider theme={theme}>
               <Head>

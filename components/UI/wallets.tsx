@@ -1,38 +1,36 @@
 import React from "react";
 import styles from "../../styles/components/wallets.module.css";
-import { Connector, useAccount, useConnectors } from "@starknet-react/core";
+import { Connector, useAccount } from "@starknet-react/core";
 import Button from "./button";
-import { FunctionComponent, useEffect } from "react";
+import { FunctionComponent } from "react";
 import { Modal } from "@mui/material";
 import WalletIcons from "./iconsComponents/icons/walletIcons";
 
 type WalletsProps = {
   closeWallet: () => void;
-  hasWallet: boolean;
+  open: boolean;
+  connectors: Connector[];
+  connectWallet: (connector: Connector) => void;
 };
 
 const Wallets: FunctionComponent<WalletsProps> = ({
   closeWallet,
-  hasWallet,
+  open,
+  connectors,
+  connectWallet,
 }) => {
-  const { connect, connectors } = useConnectors();
-  const { account } = useAccount();
 
-  useEffect(() => {
-    if (account) {
-      closeWallet();
-    }
-  }, [account, closeWallet]);
-
-  function connectWallet(connector: Connector): void {
-    connect(connector);
+  const connect = (connector: Connector) => {
+    connectWallet(connector);
     closeWallet();
-  }
+  };
+  
+  const { account } = useAccount();
 
   return (
     <Modal
       disableAutoFocus
-      open={hasWallet}
+      open={open}
       onClose={closeWallet}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"

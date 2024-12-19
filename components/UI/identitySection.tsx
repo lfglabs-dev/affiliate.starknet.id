@@ -6,7 +6,7 @@ import DollarIcon from "./iconsComponents/icons/dollarIcon";
 import InfoIcon from "./iconsComponents/icons/infoIcon";
 import AffiliateButton from "./affiliateButton";
 import DownloadButtonIcon from "./iconsComponents/icons/downloadButton";
-import { useAccount, useContractWrite } from "@starknet-react/core";
+import { useAccount, useSendTransaction } from "@starknet-react/core";
 import { useRemainingBalance } from "../../hooks/metrics";
 import { toReadablePrice } from "../../utils/priceService";
 import { gweiToEth, hexToDecimal } from "../../utils/feltService";
@@ -51,7 +51,7 @@ export const IdentitySection: FC<IdentitySectionProps> = ({ domain, affiliateLin
 		else setCanClaim(true);
 	}, [balance, error]);
 
-	const { writeAsync: executeClaim } = useContractWrite({
+	const { sendAsync: executeClaim } = useSendTransaction({
 		calls: [
 			{
 				contractAddress: process.env.NEXT_PUBLIC_REFERRAL_CONTRACT as string,
@@ -60,6 +60,7 @@ export const IdentitySection: FC<IdentitySectionProps> = ({ domain, affiliateLin
 			},
 		],
 	});
+
 	return (
 		<div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
 			<div className={`${style.section} col-span-3`}>

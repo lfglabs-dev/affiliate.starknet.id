@@ -1,4 +1,4 @@
-import { useContractRead } from "@starknet-react/core";
+import { useReadContract } from "@starknet-react/core";
 import { useNamingContract } from "./contracts";
 import { useContext, useEffect, useState } from "react";
 import { utils } from "starknetid.js";
@@ -110,12 +110,12 @@ export function useExpiryFromDomain(domain: string): ExpiryData {
     ? utils.encodeDomain(domain).map((elem) => elem.toString())
     : [];
 
-  const { data, error } = useContractRead({
-    address: contract?.address as string,
+  const { data, error } = useReadContract({
+    address: contract?.address as `0x${string}`,
     abi: contract?.abi as Abi,
     functionName: "domain_to_expiry",
     args: [encoded],
   });
 
-  return { expiry: data as any, error: error as string };
+  return { expiry: data as any, error: error as any };
 }

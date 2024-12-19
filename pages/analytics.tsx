@@ -16,7 +16,7 @@ import { RevenueCard } from "../components/UI/revenueCard";
 import ClickableAction from "../components/UI/iconsComponents/clickableAction";
 import analyticsStyle from "../styles/components/analytics.module.css";
 import { PeriodToDifferenceLabel, getDifference } from "../utils/period";
-import { useAccount, useContractWrite } from "@starknet-react/core";
+import { useAccount, useSendTransaction } from "@starknet-react/core";
 import Error from "./error";
 import { useRemainingBalance } from "../hooks/metrics";
 import { gweiToEth, hexToDecimal } from "../utils/feltService";
@@ -49,15 +49,16 @@ const Analytics: NextPage = () => {
   const [chartData, setChartData] = useState<ChartData[]>();
   const [canClaim, setCanClaim] = useState<boolean>(false);
   const { balance, error } = useRemainingBalance(hexToDecimal(address) ?? "0");
-  const { writeAsync: executeClaim } = useContractWrite({
-    calls: [
-      {
-        contractAddress: process.env.NEXT_PUBLIC_REFERRAL_CONTRACT as string,
-        entrypoint: "claim",
-        calldata: [],
-      },
-    ],
-  });
+	const { sendAsync: executeClaim } = useSendTransaction({
+		calls: [
+			{
+				contractAddress: process.env.NEXT_PUBLIC_REFERRAL_CONTRACT as string,
+				entrypoint: "claim",
+				calldata: [],
+			},
+		],
+	});
+
 
   const remainingBalance = useMemo(() => {
     if (!balance || error) return 0;

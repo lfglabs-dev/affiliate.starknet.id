@@ -1,15 +1,10 @@
 import Link from "next/link";
-import React, { useState, useEffect, FunctionComponent } from "react";
+import React, { useState, useEffect, FunctionComponent, useContext } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { FaTwitter } from "react-icons/fa";
 import styles from "../../styles/components/navbar.module.css";
 import Button from "./button";
-import {
-  useConnectors,
-  useAccount,
-  useProvider,
-  useTransactionManager,
-} from "@starknet-react/core";
+import { useProvider, useAccount, useConnect, useDisconnect, Connector } from "@starknet-react/core";
 import Wallets from "./wallets";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ModalMessage from "./modalMessage";
@@ -17,30 +12,40 @@ import { useDisplayName } from "../../hooks/displayName";
 import { CircularProgress } from "@mui/material";
 import ModalWallet from "./modalWallet";
 import { useRouter } from "next/router";
-import { constants } from "starknet";
+import { constants, StarkProfile } from "starknet";
+import { StarknetIdJsContext } from "../../context/StarknetIdJsProvider";
 
 const Navbar: FunctionComponent = () => {
   const router = useRouter();
   const [nav, setNav] = useState<boolean>(false);
-  const [hasWallet, setHasWallet] = useState<boolean>(false);
+  const [hasWallet, setShowConnetModal] = useState<boolean>(false);
   const { address } = useAccount();
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [isWrongNetwork, setIsWrongNetwork] = useState(false);
-  const { available, connect, disconnect } = useConnectors();
   const { provider } = useProvider();
   const domainOrAddress = useDisplayName(address ?? "");
   const green = "#19AA6E";
   const brown = "#402d28";
   const network =
     process.env.NEXT_PUBLIC_IS_TESTNET === "true" ? "testnet" : "mainnet";
+  const { connectAsync, connectors, connector } = useConnect();
+  const { disconnect } = useDisconnect();
   const [txLoading, setTxLoading] = useState<number>(0);
-  const { hashes } = useTransactionManager();
   const [showWallet, setShowWallet] = useState<boolean>(false);
+  const { starknetIdNavigator } = useContext(StarknetIdJsContext);
+  const [profile, setProfile] = useState<StarkProfile | undefined>(undefined);
+  const [lastConnector, setLastConnector] = useState<Connector | null>(null);
 
   useEffect(() => {
     // to handle autoconnect starknet-react adds connector id in local storage
     // if there is no value stored, we show the wallet modal
-    if (!localStorage.getItem("lastUsedConnector")) setHasWallet(true);
+    if (!localStorage.getItem("SID-lastUsedConnector")) {
+      setShowConnetModal(true);
+    } else {
+      let connectorId = localStorage.getItem("SID-lastUsedConnector");
+      const connector = connectors.find((c) => c.id === connectorId);
+      setLastConnector(connector || null);
+    }
   }, []);
 
   useEffect(() => {
@@ -60,12 +65,19 @@ const Navbar: FunctionComponent = () => {
     });
   }, [provider, network, isConnected]);
 
+  useEffect(() => {
+    if (starknetIdNavigator !== null && address !== undefined) {
+      starknetIdNavigator.getProfileData(address).then(setProfile);
+    }
+  }, [address, starknetIdNavigator]);
+
   function disconnectByClick(): void {
     disconnect();
     setIsConnected(false);
     setIsWrongNetwork(false);
-    setHasWallet(false);
+    setShowConnetModal(false);
     setShowWallet(false);
+    localStorage.removeItem("SID-connectedWallet");
   }
 
   function handleNav(): void {
@@ -74,20 +86,24 @@ const Navbar: FunctionComponent = () => {
 
   function onTopButtonClick(): void {
     if (!isConnected) {
-      if (available.length > 0) {
-        if (available.length === 1) {
-          connect(available[0]);
-        } else {
-          setHasWallet(true);
-        }
-      } else {
-        setHasWallet(true);
-      }
+      setShowConnetModal(true);
     } else {
-      // disconnectByClick();
       setShowWallet(true);
     }
   }
+
+  const connectWallet = async (connector: Connector) => {
+    try {
+      await connectAsync({ connector });
+      localStorage.setItem("SID-connectedWallet", connector.id);
+      localStorage.setItem("SID-lastUsedConnector", connector.id);
+    } catch (e) {
+      // Restart the connection if there is an error except if the user has rejected the connection
+      console.error(e);
+      const error = e as Error;
+      if (error.name !== "UserRejectedRequestError") connectWallet(connector);
+    }
+  };
 
   function topButtonText(): string | undefined {
     const textToReturn = isConnected ? domainOrAddress : "connect";
@@ -123,9 +139,9 @@ const Navbar: FunctionComponent = () => {
                   onClick={
                     isConnected
                       ? () => setShowWallet(true)
-                      : available.length === 1
-                      ? () => connect(available[0])
-                      : () => setHasWallet(true)
+                      : lastConnector
+                      ? () => connectWallet(lastConnector)
+                      : () => setShowConnetModal(true)
                   }
                   variation={isConnected ? "white" : "primary"}
                 >
@@ -144,7 +160,16 @@ const Navbar: FunctionComponent = () => {
                       ) : (
                         <div className="flex justify-center items-center">
                           <p className="mr-3">{domainOrAddress}</p>
-                          <AccountCircleIcon />
+                          {profile?.profilePicture ? (
+                            <img
+                              src={profile?.profilePicture}
+                              width="32"
+                              height="32"
+                              className="rounded-full"
+                            />
+                          ) : (
+                            <AccountCircleIcon />
+                          )}
                         </div>
                       )}
                     </>
@@ -262,12 +287,13 @@ const Navbar: FunctionComponent = () => {
         open={showWallet}
         closeModal={() => setShowWallet(false)}
         disconnectByClick={disconnectByClick}
-        hashes={hashes}
         setTxLoading={setTxLoading}
       />
       <Wallets
-        closeWallet={() => setHasWallet(false)}
-        hasWallet={Boolean(hasWallet && !isWrongNetwork)}
+        closeWallet={() => setShowConnetModal(false)}
+        open={Boolean(hasWallet && !isWrongNetwork)}
+        connectors={connectors}
+        connectWallet={connectWallet}
       />
     </>
   );
