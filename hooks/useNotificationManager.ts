@@ -3,7 +3,6 @@
 import { useAccount, useProvider } from "@starknet-react/core";
 import { useEffect, useState } from "react";
 import { hexToDecimal } from "../utils/feltService";
-import { NotificationType } from "../utils/constants";
 import {
   RejectedTransactionReceiptResponse,
   RevertedTransactionReceiptResponse,
@@ -38,7 +37,9 @@ export type TransactionData = {
 export function useNotificationManager() {
   const { provider } = useProvider();
   const { address } = useAccount();
-  const [notifications, setNotifications] = useState<SIDNotification<NotificationData>[]>([]);
+  const [notifications, setNotifications] = useState<
+    SIDNotification<NotificationData>[]
+  >([]);
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
