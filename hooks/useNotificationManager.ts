@@ -1,13 +1,16 @@
+"use client";
+
 import { useAccount, useProvider } from "@starknet-react/core";
-import { useAtom } from "jotai";
-import { atomWithStorage } from "jotai/utils";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { hexToDecimal } from "../utils/feltService";
+import { NotificationType } from "../utils/constants";
 import {
   RejectedTransactionReceiptResponse,
   RevertedTransactionReceiptResponse,
   TransactionType,
 } from "starknet";
+
+const STORAGE_KEY = "userNotifications_SID";
 
 export type NotificationData = TransactionData;
 
@@ -32,15 +35,21 @@ export type TransactionData = {
     | "REVERTED";
 };
 
-const notificationsAtom = atomWithStorage<SIDNotification<NotificationData>[]>(
-  "userNotifications_SID",
-  []
-);
-
 export function useNotificationManager() {
   const { provider } = useProvider();
   const { address } = useAccount();
-  const [notifications, setNotifications] = useAtom(notificationsAtom);
+  const [notifications, setNotifications] = useState<SIDNotification<NotificationData>[]>([]);
+
+  useEffect(() => {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      setNotifications(JSON.parse(stored));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(notifications));
+  }, [notifications]);
 
   useEffect(() => {
     const checkTransactionStatus = async (
