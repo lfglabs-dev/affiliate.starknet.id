@@ -6,13 +6,13 @@ import { Abi } from "starknet";
 export function useNamingContract() {
   return useContract({
     abi: naming_abi as Abi,
-    address: process.env.NEXT_PUBLIC_NAMING_CONTRACT,
+    address: process.env.NEXT_PUBLIC_NAMING_CONTRACT as `0x${string}`,
   });
 }
 
 export function useReferralContract() {
   return useContract({
     abi: referral_abi.abi as Abi,
-    address: process.env.NEXT_PUBLIC_REFERRAL_CONTRACT,
+    address: process.env.NEXT_PUBLIC_REFERRAL_CONTRACT as `0x${string}`,
   });
 }

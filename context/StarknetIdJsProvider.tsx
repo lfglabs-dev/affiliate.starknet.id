@@ -1,6 +1,7 @@
-import React, { FunctionComponent } from "react";
-import { createContext, useMemo } from "react";
-import { Provider, constants } from "starknet";
+"use client";
+
+import React, { FunctionComponent, createContext, useMemo } from "react";
+import { RpcProvider, constants } from "starknet";
 import { StarknetIdNavigator } from "starknetid.js";
 
 type StarknetIdJsConfig = {
@@ -14,21 +15,20 @@ export const StarknetIdJsContext = createContext<StarknetIdJsConfig>({
 export const StarknetIdJsProvider: FunctionComponent<Context> = ({
   children,
 }) => {
+  const provider = useMemo(() => {
+    return new RpcProvider({
+      nodeUrl: process.env.NEXT_PUBLIC_RPC_URL!,
+    });
+  }, []);
+
   const starknetIdNavigator = useMemo(() => {
     return new StarknetIdNavigator(
-      new Provider({
-        sequencer: {
-          network:
-            process.env.NEXT_PUBLIC_IS_TESTNET === "true"
-              ? constants.NetworkName.SN_GOERLI
-              : constants.NetworkName.SN_MAIN,
-        },
-      }),
+      provider,
       process.env.NEXT_PUBLIC_IS_TESTNET === "true"
-        ? constants.StarknetChainId.SN_GOERLI
+        ? constants.StarknetChainId.SN_SEPOLIA
         : constants.StarknetChainId.SN_MAIN
     );
-  }, []);
+  }, [provider]);
 
   const contextValues = useMemo(() => {
     return {

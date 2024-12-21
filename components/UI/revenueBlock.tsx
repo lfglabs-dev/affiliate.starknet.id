@@ -5,7 +5,7 @@ import { useRemainingBalance } from "../../hooks/metrics";
 import { toReadablePrice } from "../../utils/priceService";
 import { Paid } from "@mui/icons-material";
 import { gweiToEth, hexToDecimal } from "../../utils/feltService";
-import { useAccount, useContractWrite } from "@starknet-react/core";
+import { useAccount, useSendTransaction } from "@starknet-react/core";
 
 export const RevenueBlock: FC = () => {
   // Balance to claim
@@ -25,16 +25,18 @@ export const RevenueBlock: FC = () => {
       setCanClaim(false);
     else setCanClaim(true);
   }, [balance, error]);
-  const { writeAsync: executeClaim } = useContractWrite({
-    calls: [
-      {
-        contractAddress: process.env.NEXT_PUBLIC_REFERRAL_CONTRACT as string,
-        entrypoint: "claim",
-        calldata: [],
-      },
-    ],
-  });
 
+  const { sendAsync: executeClaim } = useSendTransaction({
+		calls: [
+			{
+				contractAddress: process.env.NEXT_PUBLIC_REFERRAL_CONTRACT as string,
+				entrypoint: "claim",
+				calldata: [],
+			},
+		],
+	});
+
+  
   return (
     <div
       className={`${styles.revenueCard} ${styles.secondary} flex flex-1 flex-grow rounded-lg p-6 px-8`}
