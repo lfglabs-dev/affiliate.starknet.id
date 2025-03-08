@@ -9,38 +9,40 @@ interface FaqBoardProps {
 
 export const FaqBoard: FC<FaqBoardProps> = ({ faq }) => {
 	return (
-		<div className="w-full max-w-[1184px]  mx-auto bg-[#FEF7F1] rounded-lg p-8 overflow-hidden">
-			<div className="space-y-6 shadow-[0px_14px_39px_0px_rgba(0,0,0,0.1)] px-[24px] pt-[24px]">
-			<h1 className="text-3xl font-extrabold">FREQUENTLY ASKED QUESTION</h1>
+		<div className="w-full max-w-[1184px]  mx-auto bg-[#FEF7F1] p-8 overflow-hidden">
+			<div className="space-y-6 shadow-[0px_14px_39px_0px_rgba(0,0,0,0.1)] px-[24px] pt-[24px] rounded-2xl">
+			<h1 className="text-3xl text-[#454545] font-extrabold">FREQUENTLY ASKED QUESTION</h1>
 
 				{faq.map((faq, index) => (
-					<Accordion
-						key={index}
-						className="bg-transparent shadow-none before:hidden"
-						sx={{
-							"&::before": {
-								backgroundColor: "#000",
-							},
-						}}
-						disableGutters={true}
-						square>
-						<AccordionSummary
-							expandIcon={
-								<div className="w-6 h-6 flex items-center justify-center border border-gray-600 rounded-md ">
-									<PlusIcon width="10" />
-								</div>
-							}
-							className="p-0 hover:bg-transparent min-h-0">
-							<div className="flex items-center gap-4">
-								<h1 className="text-3xl text-gray-800 min-w-[40px]">{String(index + 1).padStart(2, "0")}</h1>
-								<p className="text-lg font-medium text-gray-800">{faq.question}</p>
-							</div>
-						</AccordionSummary>
-						<AccordionDetails className="pl-[64px] pt-2 pb-4">
-							<p className="text-gray-600 text-left">{faq.answer}</p>
-						</AccordionDetails>
-					</Accordion>
-				))}
+									<div key={index}>
+										<Accordion
+											className="bg-transparent shadow-none before:hidden"
+											sx={{
+												"&::before": {
+													backgroundColor: "#000",
+												},
+											}}
+											disableGutters={true}
+											square>
+											<AccordionSummary
+												expandIcon={
+													<div className="w-6 h-6 flex items-center justify-center border border-gray-600 rounded-md ">
+														<PlusIcon width="10" />
+													</div>
+												}
+												className="p-0 hover:bg-transparent min-h-0">
+												<div className="flex items-center gap-4">
+													<h1 className="text-3xl text-[#454545] min-w-[40px]">{String(index + 1).padStart(2, "0")}</h1>
+													<p className="text-lg font-medium text-gray-800">{faq.question}</p>
+												</div>
+											</AccordionSummary>
+											<AccordionDetails className="pl-[64px] pt-2 pb-4">
+												<p className="text-gray-600 text-left">{faq.answer}</p>
+											</AccordionDetails>
+										</Accordion>
+										<hr className="border-t-2 border-gray-200 my-4" />
+									</div>
+								))}
 			</div>
 		</div>
 	);
