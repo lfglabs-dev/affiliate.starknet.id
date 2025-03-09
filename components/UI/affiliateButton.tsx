@@ -9,6 +9,7 @@ type AffiliateButtonProps = {
   style?: "primary" | "secondary" | "disabled";
   logoBackgroundColor?: string;
   wrapperClassName?: string;
+  titleClassName?: string;
 };
 
 const AffiliateButton: FunctionComponent<AffiliateButtonProps> = ({
@@ -19,6 +20,7 @@ const AffiliateButton: FunctionComponent<AffiliateButtonProps> = ({
   style = "secondary",
   logoBackgroundColor,
   wrapperClassName = "",
+  titleClassName = "",
 }) => {
   return (
     <div
@@ -32,7 +34,9 @@ const AffiliateButton: FunctionComponent<AffiliateButtonProps> = ({
       <div className={`${styles.clickableIconPrimary}`}>{icon}</div>
 
       <div className="ml-3">
-        <h1 className={styles.clickableActionTitle}>{title}</h1>
+        <h1 className={`${styles.clickableActionTitle} ${titleClassName}`}>
+          {title}
+        </h1>
         <p className={styles.clickableActionDescription}>{description}</p>
       </div>
     </div>

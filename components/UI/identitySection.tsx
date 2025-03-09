@@ -124,7 +124,8 @@ export const IdentitySection: FC<IdentitySectionProps> = ({
                 title={canClaim ? "ClAIM" : "Nothing to claim"}
                 icon={<DollarIconLB />}
                 style={canClaim ? "primary" : "disabled"}
-                wrapperClassName="w-fit"
+                wrapperClassName="w-fit text-center"
+                titleClassName={!canClaim ? "text-[11px]" : ""}
               />
             </div>
           </div>
