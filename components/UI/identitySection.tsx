@@ -74,8 +74,8 @@ export const IdentitySection: FC<IdentitySectionProps> = ({
       <div
         className={`${style.section} col-span-3 bg-[--affiliate-card-bg] shadow-lg`}
       >
-        <div>
-          <div className="p-10 py-5">
+        <div className="h-full">
+          <div className="px-12 py-7 flex flex-col justify-evenly h-full">
             <div className="flex flex-row items-center">
               <ColoredStarknetIcon width="16" />
               <p className="ml-1 text-micro text-[--secondary]">{domain}</p>
