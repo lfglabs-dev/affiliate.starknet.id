@@ -2,10 +2,10 @@ import { FC, useState, useMemo, useEffect } from "react";
 import { AffiliateLink } from "./affiliateLink";
 import style from "../../styles/components/identitySection.module.css";
 import ColoredStarknetIcon from "./iconsComponents/icons/coloredStarknetIcon";
-import DollarIcon from "./iconsComponents/icons/dollarIcon";
+import DollarIconLB from "./iconsComponents/icons/dollarIconLB";
 import InfoIcon from "./iconsComponents/icons/infoIcon";
 import AffiliateButton from "./affiliateButton";
-import DownloadButtonIcon from "./iconsComponents/icons/downloadButton";
+import DownloadButtonLBIcon from "./iconsComponents/icons/downloadButtonLB";
 import { useAccount, useSendTransaction } from "@starknet-react/core";
 import { useRemainingBalance } from "../../hooks/metrics";
 import { toReadablePrice } from "../../utils/priceService";
@@ -43,7 +43,11 @@ export const IdentitySection: FC<IdentitySectionProps> = ({
   tokenId,
 }) => {
   const { address } = useAccount();
-  const { balance, error } = useRemainingBalance(hexToDecimal(address) ?? "0");
+  // const { balance, error } = useRemainingBalance(hexToDecimal(address) ?? "0");
+  const { balance, error } = {
+    balance: 100e18,
+    error: false,
+  };
   const [canClaim, setCanClaim] = useState(false);
   const remainingBalance = useMemo(() => {
     if (!balance || error) return 0;
@@ -70,7 +74,7 @@ export const IdentitySection: FC<IdentitySectionProps> = ({
   });
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+    <div className="flex flex-col justify-center mx-auto max-w-[1184px] gap-6 md:flex-row">
       <div className={`${style.section} col-span-3`}>
         <div>
           <div className="p-10 py-5">
@@ -81,7 +85,7 @@ export const IdentitySection: FC<IdentitySectionProps> = ({
             <h1 className={`${style.title} uppercase font-bold`}>
               THE STARK AFFILIATE <span className="text-primary">PROGRAM</span>
             </h1>
-            <p className="text-small mb-4">
+            <p className="mb-4 text-small">
               Earn <span className="text-bold">25%</span> commission in ETH on
               sales through your referral link, plus up to{" "}
               <span className="text-bold">25%</span> extra from your referrals’
@@ -94,10 +98,12 @@ export const IdentitySection: FC<IdentitySectionProps> = ({
 
       <div className="col-span-2 space-y-4">
         <div className={`${style.card} ${style.bgAirBalloons} py-2`}>
-          <div className="flex h-full items-center justify-between w-full pr-7">
-            <div className="p-5 ">
+          <div className="flex items-center justify-between w-full h-full py-[17px] px-[20px]">
+            <div className="">
               <div className="flex items-center">
-                <p className="text-small mr-2">Your unclaimed revenue</p>
+                <p className={`mr-2 font-normal text-small ${style.subtitle}`}>
+                  Your unclaimed revenue
+                </p>
                 <div className={`${style.handCursor} relative group`}>
                   <InfoIcon width="20" />
                   <div className="absolute hidden group-hover:block bg-[#454545] text-white p-3 rounded-lg text-small -right-7 -top-7 translate-x-full w-48 text-left z-50">
@@ -109,25 +115,28 @@ export const IdentitySection: FC<IdentitySectionProps> = ({
               </div>
               <h1 className={` uppercase font-bold`}>
                 {remainingBalance}
-                <span className="text-small pl-2">ETH</span>
+                <span className="pl-2 text-small">ETH</span>
               </h1>
             </div>
             <div>
               <AffiliateButton
                 onClick={canClaim ? executeClaim : undefined}
                 title={canClaim ? "ClAIM" : "Nothing to claim"}
-                icon={<DollarIcon width="16px" />}
+                icon={<DollarIconLB />}
                 style={canClaim ? "primary" : "disabled"}
+                wrapperClassName="w-fit"
               />
             </div>
           </div>
         </div>
 
         <div className={`${style.card} ${style.bgPalmTrees} py-2`}>
-          <div className="flex h-full items-center justify-between w-full pr-1 lg:pr-7">
-            <div className="p-5 ">
+          <div className="flex items-center justify-between w-full h-full py-[17px] px-[20px]">
+            <div className="">
               <div className="flex items-center">
-                <p className="text-small mr-2">Marketing toolkit</p>{" "}
+                <p className={`mr-2 font-normal text-small ${style.subtitle}`}>
+                  Marketing toolkit
+                </p>
                 <div className={`${style.handCursor} relative group`}>
                   <InfoIcon width="20" />
                   <div className="absolute hidden group-hover:block bg-[#454545] text-white p-3 rounded-lg text-small -right-7 -top-7 translate-x-full w-48 text-left z-50">
@@ -138,14 +147,14 @@ export const IdentitySection: FC<IdentitySectionProps> = ({
                 </div>
               </div>
               <h1 className={`  font-bold`}>
-                23<span className="text-small pl-2">items</span>
+                23<span className="pl-2 text-small">items</span>
               </h1>
             </div>
             <div>
               <AffiliateButton
                 onClick={() => downloadMediaKit()}
                 title={"DOWNLOAD"}
-                icon={<DownloadButtonIcon width="16px" color="white" />}
+                icon={<DownloadButtonLBIcon />}
                 style="secondary"
                 logoBackgroundColor={"#fff"}
               />

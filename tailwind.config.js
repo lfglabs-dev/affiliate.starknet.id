@@ -9,6 +9,9 @@ module.exports = {
         tertiary: "#BF9E7B",
         background: "#FFF9F0",
       },
+      fontFamily: {
+        poppins: "Poppins-Regular",
+      },
     },
   },
   plugins: [],

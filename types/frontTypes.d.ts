@@ -1,6 +1,6 @@
 type IconProps = {
   color?: string;
-  width: string;
+  width?: string;
 };
 
 type Identity = {
