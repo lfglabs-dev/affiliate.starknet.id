@@ -10,9 +10,9 @@ interface FaqBoardProps {
 export const FaqBoard: FC<FaqBoardProps> = ({ faq }) => {
 	return (
 		<div className="w-full max-w-[1184px]  mx-auto bg-[#FEF7F1] p-8 overflow-hidden">
-			<div className="space-y-6 shadow-[0px_14px_39px_0px_rgba(0,0,0,0.1)] px-[24px] pt-[24px] rounded-2xl">
-			<h1 className="text-3xl text-[#454545] font-extrabold">FREQUENTLY ASKED QUESTION</h1>
+						<h1 className="text-3xl text-[#454545] flex justify-center font-extrabold mb-5">FREQUENTLY ASKED QUESTION</h1>
 
+			<div className="space-y-6 shadow-[0px_14px_39px_0px_rgba(0,0,0,0.1)] px-[24px] pt-[24px] rounded-2xl">
 				{faq.map((faq, index) => (
 									<div key={index}>
 										<Accordion
@@ -40,7 +40,7 @@ export const FaqBoard: FC<FaqBoardProps> = ({ faq }) => {
 												<p className="text-gray-600 text-left">{faq.answer}</p>
 											</AccordionDetails>
 										</Accordion>
-										<hr className="border-t-2 border-gray-200 my-4" />
+										<hr className="border-t-1 border-gray-200 my-4" />
 									</div>
 								))}
 			</div>
