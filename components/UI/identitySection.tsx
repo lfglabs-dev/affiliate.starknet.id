@@ -43,11 +43,7 @@ export const IdentitySection: FC<IdentitySectionProps> = ({
   tokenId,
 }) => {
   const { address } = useAccount();
-  // const { balance, error } = useRemainingBalance(hexToDecimal(address) ?? "0");
-  const { balance, error } = {
-    balance: 100e18,
-    error: false,
-  };
+  const { balance, error } = useRemainingBalance(hexToDecimal(address) ?? "0");
   const [canClaim, setCanClaim] = useState(false);
   const remainingBalance = useMemo(() => {
     if (!balance || error) return 0;
