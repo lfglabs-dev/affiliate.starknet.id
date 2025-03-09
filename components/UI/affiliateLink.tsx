@@ -24,8 +24,11 @@ export const AffiliateLink: FC<AffiliateLinkProps> = ({ link, domain }) => {
   }, [link]);
 
   return (
-    <Button className={`${style.button} ml-[-0.5rem] mt-4 min-h-[30px] h-[30px]`} onClick={handleClick}>
-      <p className="text-default lg:mr-2 mr-1">
+    <Button
+      className={`${style.button} ml-[-0.5rem] mt-4 min-h-[30px] h-[30px]`}
+      onClick={handleClick}
+    >
+      <p className="text-small lg:mr-2 mr-1 text-[--grey]">
         {linkToShow.substring(8, linkToShow.length)}
       </p>
       {copied ? (

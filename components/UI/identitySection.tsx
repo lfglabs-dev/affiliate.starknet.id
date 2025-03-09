@@ -71,21 +71,24 @@ export const IdentitySection: FC<IdentitySectionProps> = ({
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-      <div className={`${style.section} col-span-3`}>
+      <div
+        className={`${style.section} col-span-3 bg-[--affiliate-card-bg] shadow-lg`}
+      >
         <div>
           <div className="p-10 py-5">
             <div className="flex flex-row items-center">
               <ColoredStarknetIcon width="16" />
-              <p className="ml-1 text-micro">{domain}</p>
+              <p className="ml-1 text-micro text-[--secondary]">{domain}</p>
             </div>
-            <h1 className={`${style.title} uppercase font-bold`}>
-              THE STARK AFFILIATE <span className="text-primary">PROGRAM</span>
+            <h1 className={`${style.title} uppercase font-bold text-[--grey]`}>
+              THE STARK AFFILIATE{" "}
+              <span className="text-[--primary600]">PROGRAM</span>
             </h1>
-            <p className="text-small mb-4">
-              Earn <span className="text-bold">25%</span> commission in ETH on
-              sales through your referral link, plus up to{" "}
-              <span className="text-bold">25%</span> extra from your referrals’
-              revenue.
+            <p className="text-small mb-4  md:w-[70%] lg:w-full xl:w-[70%] text-[--light-brown]">
+              Earn <span className="text-bold text-[--grey]">25%</span>{" "}
+              commission in ETH on sales through your referral link, plus up to{" "}
+              <span className="text-bold text-[--grey]">25%</span> extra from
+              your referrals’ revenue.
             </p>
             <AffiliateLink link={affiliateLink} domain={domain} />
           </div>
