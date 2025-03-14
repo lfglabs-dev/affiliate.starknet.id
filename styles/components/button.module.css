@@ -109,8 +109,17 @@
   outline: none;
 }
 
-.nq-button:focus::after {
+/* .nq-button:focus::after {
   opacity: 1;
+} */
+
+.nq-button:focus::after {
+  opacity: 0 !important;
+}
+
+.nq-button:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 @media (max-width: 1024px) {

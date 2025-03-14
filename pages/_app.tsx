@@ -5,12 +5,17 @@ import Navbar from "../components/UI/navbar";
 import Head from "next/head";
 import { ThemeProvider } from "@mui/material";
 import theme from "../styles/theme";
-import { InjectedConnector, jsonRpcProvider, StarknetConfig } from "@starknet-react/core";
+import {
+  InjectedConnector,
+  jsonRpcProvider,
+  StarknetConfig,
+} from "@starknet-react/core";
 import { Analytics } from "@vercel/analytics/react";
 import { StarknetIdJsProvider } from "../context/StarknetIdJsProvider";
 import posthog from "posthog-js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Chain, sepolia, mainnet } from "@starknet-react/chains";
+import { WalletConnectProvider } from "../context/WalletProvider";
 
 // Wallet Connectors
 const connectors = [
@@ -48,17 +53,19 @@ function MyApp({ Component, pageProps }: AppProps) {
           provider={providers}
         >
           <StarknetIdJsProvider>
-            <ThemeProvider theme={theme}>
-              <Head>
-                <title>affiliate.starknet.id</title>
-                <meta
-                  name="viewport"
-                  content="width=device-width, initial-scale=1"
-                />
-              </Head>
-              <Navbar />
-              <AnyComponent {...pageProps} />
-            </ThemeProvider>
+            <WalletConnectProvider>
+              <ThemeProvider theme={theme}>
+                <Head>
+                  <title>affiliate.starknet.id</title>
+                  <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
+                  />
+                </Head>
+                <Navbar />
+                <AnyComponent {...pageProps} />
+              </ThemeProvider>
+            </WalletConnectProvider>
             <Analytics />
           </StarknetIdJsProvider>
         </StarknetConfig>

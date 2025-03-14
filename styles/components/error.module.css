@@ -5,3 +5,18 @@
   justify-content: center;
   height: 80vh;
 }
+
+.error_title {
+  text-align: center;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 48px;
+}
+
+.error_desc_title {
+  color: var(--light-brown);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  margin-top: 16px;
+}
