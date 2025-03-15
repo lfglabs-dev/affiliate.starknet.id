@@ -11,6 +11,7 @@
   font-weight: 400;
   font-size: 36px;
   line-height: 48px;
+  color: var(--grey);
 }
 
 .error_desc_title {
