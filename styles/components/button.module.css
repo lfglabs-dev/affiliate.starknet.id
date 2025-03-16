@@ -109,10 +109,6 @@
   outline: none;
 }
 
-/* .nq-button:focus::after {
-  opacity: 1;
-} */
-
 .nq-button:focus::after {
   opacity: 0 !important;
 }
