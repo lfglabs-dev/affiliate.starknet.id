@@ -18,6 +18,9 @@ module.exports = {
         poppins: "Poppins-Regular",
       },
     },
+    fontFamily: {
+      quickZap: ["QuickZap"],
+    },
   },
   plugins: [],
   important: true,
