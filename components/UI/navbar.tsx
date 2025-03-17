@@ -4,17 +4,15 @@ import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { FaTwitter } from "react-icons/fa";
 import styles from "../../styles/components/navbar.module.css";
 import Button from "./button";
-import { useAccount, useConnect, useDisconnect } from "@starknet-react/core";
+import { useConnect, useDisconnect } from "@starknet-react/core";
 import Wallets from "./wallets";
 import ModalMessage from "./modalMessage";
 import { useMediaQuery } from "@mui/material";
 import ModalWallet from "./modalWallet";
-import { useRouter } from "next/router";
 import ConnectWalletButton from "./ConnectWalletButton";
 import { useConnectWallet } from "../../context/WalletProvider";
 
 const Navbar: FunctionComponent = () => {
-  const router = useRouter();
   const [nav, setNav] = useState<boolean>(false);
 
   const {
