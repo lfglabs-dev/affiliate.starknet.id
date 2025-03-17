@@ -149,14 +149,6 @@ const Navbar: FunctionComponent = () => {
                       Affiliate Space
                     </li>
                   </Link>
-                  {/* <Link href="/analytics">
-                    <li
-                      onClick={() => setNav(false)}
-                      className={styles.menuItemSmall}
-                    >
-                      Analytics
-                    </li>
-                  </Link> */}
                 </ul>
               </div>
             </div>
