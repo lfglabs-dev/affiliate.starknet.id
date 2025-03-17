@@ -109,7 +109,7 @@ export const IdentitySection: FC<IdentitySectionProps> = ({
                   </div>
                 </div>
               </div>
-              <h1 className={` uppercase font-bold`}>
+              <h1 className={`text-grey-600 uppercase font-bold`}>
                 {remainingBalance}
                 <span className="pl-2 text-small">ETH</span>
               </h1>
@@ -143,7 +143,7 @@ export const IdentitySection: FC<IdentitySectionProps> = ({
                   </div>
                 </div>
               </div>
-              <h1 className={`  font-bold`}>
+              <h1 className={`text-grey-600  font-bold`}>
                 23<span className="pl-2 text-small">items</span>
               </h1>
             </div>
