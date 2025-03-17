@@ -153,7 +153,6 @@ export const IdentitySection: FC<IdentitySectionProps> = ({
                 title={"DOWNLOAD"}
                 icon={<DownloadButtonLBIcon />}
                 style="secondary"
-                logoBackgroundColor={"#fff"}
               />
             </div>
           </div>

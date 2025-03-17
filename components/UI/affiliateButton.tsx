@@ -7,7 +7,6 @@ type AffiliateButtonProps = {
   title?: string;
   description?: string;
   style?: "primary" | "secondary" | "disabled";
-  logoBackgroundColor?: string;
   wrapperClassName?: string;
   titleClassName?: string;
 };
@@ -18,7 +17,6 @@ const AffiliateButton: FunctionComponent<AffiliateButtonProps> = ({
   title,
   description,
   style = "secondary",
-  logoBackgroundColor,
   wrapperClassName = "",
   titleClassName = "",
 }) => {

@@ -10,15 +10,11 @@
   box-sizing: border-box;
 
   /* Auto layout */
-  /*   margin-top: 15px;
-  margin-bottom: 5px; */
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   padding: 12px 8px;
-  /* gap: 8px; */
-  /* min-width: 132px; */
   max-height: 56px;
   background: #ffffff;
 
