@@ -4,7 +4,6 @@ import styles from "../../styles/components/button.module.css";
 type ButtonProps = {
   onClick: () => void;
   children: string | ReactNode;
-  className?: string;
   disabled?: boolean;
   variation?: string;
   radius?: string;
@@ -12,7 +11,6 @@ type ButtonProps = {
 
 const Button: FunctionComponent<ButtonProps> = ({
   children,
-  className = "",
   onClick,
   disabled = false,
   variation = "primary",
@@ -22,7 +20,7 @@ const Button: FunctionComponent<ButtonProps> = ({
     <button
       disabled={disabled}
       onClick={onClick}
-      className={`${className} ${styles["nq-button"]} ${styles[variation]}`}
+      className={`${styles["nq-button"]} ${styles[variation]}`}
       style={radius ? { borderRadius: radius } : undefined}
     >
       {children}
