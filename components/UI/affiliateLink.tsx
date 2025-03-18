@@ -25,16 +25,16 @@ export const AffiliateLink: FC<AffiliateLinkProps> = ({ link, domain }) => {
 
   return (
     <Button
-      className={`${style.button} ml-[-0.5rem] mt-4 min-h-[30px] h-[30px]`}
+      className={`${style.button} ml-[-0.5rem] mt-4 min-h-[30px] h-[30px] bg-[--affiliate-card-bg]`}
       onClick={handleClick}
     >
       <p className="text-small lg:mr-2 mr-1 text-[--grey]">
         {linkToShow.substring(8, linkToShow.length)}
       </p>
       {copied ? (
-        <CopiedIcon width="25" color={theme.palette.primary.main} />
+        <CopiedIcon width="20" color={theme.palette.primary.main} />
       ) : (
-        <CopyIcon width="25" color={theme.palette.primary.main} />
+        <CopyIcon width="20" color={theme.palette.primary.main} />
       )}
     </Button>
   );
