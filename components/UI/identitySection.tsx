@@ -76,10 +76,11 @@ export const IdentitySection: FC<IdentitySectionProps> = ({
           <div className="p-10 py-5">
             <div className="flex flex-row items-center">
               <ColoredStarknetIcon width="16" />
-              <p className="ml-1 text-micro">{domain}</p>
+              <p className="ml-1 text-micro text-[--secondary]">{domain}</p>
             </div>
-            <h1 className={`${style.title} uppercase font-bold`}>
-              THE STARK AFFILIATE <span className="text-primary">PROGRAM</span>
+            <h1 className={`${style.title} uppercase font-bold text-[--grey]`}>
+              THE STARK AFFILIATE{" "}
+              <span className="text-[--primary600]">PROGRAM</span>
             </h1>
             <p className="mb-4 text-small">
               Earn <span className="text-bold">25%</span> commission in ETH on
