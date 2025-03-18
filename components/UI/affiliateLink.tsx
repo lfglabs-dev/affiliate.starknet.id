@@ -32,9 +32,9 @@ export const AffiliateLink: FC<AffiliateLinkProps> = ({ link, domain }) => {
         {linkToShow.substring(8, linkToShow.length)}
       </p>
       {copied ? (
-        <CopiedIcon width="20" color={theme.palette.primary.main} />
+        <CopiedIcon width="18" color={theme.palette.primary.main} />
       ) : (
-        <CopyIcon width="20" color={theme.palette.primary.main} />
+        <CopyIcon width="18" color={theme.palette.primary.main} />
       )}
     </Button>
   );
