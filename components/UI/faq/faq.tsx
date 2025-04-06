@@ -9,7 +9,8 @@ interface FaqBoardProps {
 
 export const FaqBoard: FC<FaqBoardProps> = ({ faq }) => {
 	return (
-		<div className="w-11/12  mx-auto bg-[#ffffff] rounded-lg p-8 overflow-hidden mb-10">
+
+		<div className="w-full max-w-[1184px]  mx-auto rounded-lg p-8 overflow-hidden">
 			<div className="mb-8">
 				<h1 className="text-3xl font-extrabold text-center">FREQUENTLY ASKED QUESTION</h1>
 			</div>
